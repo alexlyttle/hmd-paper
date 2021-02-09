@@ -17,10 +17,8 @@ __pycache__/
 *.aux
 *.fdb_latexmk
 *.fls
-paper/*.log
-paper/*.out
-plan/*.log
-plan/*.out
+*.log
+*.out
 *.synctex.gz
 *.bbl
 *.blg
