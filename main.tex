@@ -672,29 +672,6 @@ In Table \ref{tab:np}, we present results for the 65 APOKASC stars from the NP m
 	\input{tables/stars_outputs_MPS.tex}
 \end{table*}
 
-Figure \ref{fig:unc-comp} compares the uncertainties in mass, radius and age for each of the models in this work, with those of the results for the same stars from \citetalias{Serenelli.Johnson.ea2017}. We saw a similar improvement in uncertainty between the NP and pooled models as with the synthetic stars in Figure \ref{fig:shrinkage}. We found that the statistical uncertainties in mass from the pooled models were reduced by a factor of $\sim 2$ over \citetalias{Serenelli.Johnson.ea2017} with a median of $2.5$ per cent. We also obtained smaller uncertainties in radius and age of $1.2$ and $12$ per cent respectively when pooling the stellar parameters.
-
-\begin{figure*}
-    \centering
-    \begin{subfigure}[b]{.33\linewidth}
-        \centering
-        \includegraphics[width=\linewidth]{figures/sigma_mass.png}
-        % \caption{Mass}
-    \end{subfigure}%
-    \begin{subfigure}[b]{.33\linewidth}
-        \centering
-        \includegraphics[width=\linewidth]{figures/sigma_rad.png}
-        % \caption{Radius}
-    \end{subfigure}%
-    \begin{subfigure}[b]{.33\linewidth}
-        \centering
-        \includegraphics[width=\linewidth]{figures/sigma_age.png}
-        % \caption{Age}
-    \end{subfigure}%
-    \caption{Kernel density estimates (KDEs) of the distribution of statistical uncertainties in the results from each model compared with those of \citepalias{Serenelli.Johnson.ea2017} for the sample of APOKASC dwarfs and subgiants.}
-    \label{fig:unc-comp}
-\end{figure*}
-
 \subsection{Population parameter results}\label{sec:hparam-results}
 
 We obtained values for the hyperparameters for each of the models and present them in Table \ref{tab:hparam_results} along with their upper and lower 68 per cent credible regions. We omit the results for $Y_P$ because its posterior is the same as the prior, $Y_P=0.247\pm0.001$ for all the models. We fit the same hyperparameters from the PP model to the NP model results for $Y_\mathrm{init}$, $Z_\mathrm{init}$, and $\mlt$ for the purpose of comparison. However, the NP model results suffer from boundary effects which makes the resulting fit unreliable, pushing the population mean to the centre of the priors and underestimating the uncertainties. We leave the NP results here only for completeness.
@@ -856,7 +833,28 @@ Secondly, our choice of \citet{Asplund.Grevesse.ea2009} solar chemical mixture d
 
 Although updated, much of our observable data is comparable to that of \citetalias{Serenelli.Johnson.ea2017}, with the exception of $\teff$. The preferred results from \citetalias{Serenelli.Johnson.ea2017} were determined using a photometric $\teff$ scale which we found to be on average $\sim \SI{170}{\kelvin}$ greater than our spectroscopic scale from DR14. In \citetalias{Serenelli.Johnson.ea2017}, they saw a similar offset between the DR13 $\teff$ available at the time. They found a median difference in mass, radius, and age of approximately $-6$, $-2$, and $+35$ per cent respectively with results from the photometric $\teff$ scale subtracted from the spectroscopic scale.
 
-In Figure \ref{fig:unc-comp} we compare our statistical uncertainties with results for the equivalent stars from \citetalias{Serenelli.Johnson.ea2017} for mass, radius, and age. We found that the NP model yielded comparable uncertainties to \citetalias{Serenelli.Johnson.ea2017} but note that these are likely underestimated due the influence of the prior boundaries for $Y_\mathrm{init}$ and $\mlt$. We expected larger uncertainties because we included additional free parameters ($Y_\mathrm{init}$ and $\mlt$) over the work of \citetalias{Serenelli.Johnson.ea2017}. However, when we treat these parameters hierarchically, we saw a reduction in uncertainties from all of the pooled models. This is because our prior assumptions about the population allows for the sharing of information between the stars. This uncertainty reduction scales with the number of stars in our sample, demonstrated by the results for the synthetic stars in Figure \ref{fig:shrinkage}. Thus, hierarchically modelling our population resulted in improved statistical uncertainties in stellar fundamental parameters.
+\begin{figure*}
+    \centering
+    \begin{subfigure}[b]{.33\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/sigma_mass.png}
+        % \caption{Mass}
+    \end{subfigure}%
+    \begin{subfigure}[b]{.33\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/sigma_rad.png}
+        % \caption{Radius}
+    \end{subfigure}%
+    \begin{subfigure}[b]{.33\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/sigma_age.png}
+        % \caption{Age}
+    \end{subfigure}%
+    \caption{Kernel density estimates (KDEs) of the distribution of statistical uncertainties in the results from each model compared with those of \citepalias{Serenelli.Johnson.ea2017} for the sample of APOKASC dwarfs and subgiants.}
+    \label{fig:unc-comp}
+\end{figure*}
+
+In Figure \ref{fig:unc-comp} we compare our statistical uncertainties for $M$, $R$, and $\tau$ with those for the equivalent stars from \citetalias{Serenelli.Johnson.ea2017}. We found that the NP model yielded comparable uncertainties to \citetalias{Serenelli.Johnson.ea2017} but note that these are likely underestimated due the influence of the prior boundaries for $Y_\mathrm{init}$ and $\mlt$. We expected larger uncertainties because we included additional free parameters ($Y_\mathrm{init}$ and $\mlt$) over the work of \citetalias{Serenelli.Johnson.ea2017}. However, when we treat these parameters hierarchically, we saw a reduction in uncertainties from all of the pooled models. This is because our prior assumptions about the population allows for the sharing of information between the stars. This uncertainty reduction scales with the number of stars in our sample, demonstrated by the results for the synthetic stars in Figure \ref{fig:shrinkage}. Thus, hierarchically modelling our population resulted in improved statistical uncertainties in stellar fundamental parameters.
 
 In the following subsection, we compare the results between our PPS model with that of \citetalias{Serenelli.Johnson.ea2017} for mass, radius, and age with reference to Figure \ref{fig:comp}. We preferred the PPS model for comparison because it utilised the high-precision data available for the Sun as a star to help calibrate the sample, while partially pooling both $Y_\mathrm{init}$ and $\mlt$ to allow for small variations within the population.
 
