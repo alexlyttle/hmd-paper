@@ -214,7 +214,7 @@ The final sample comprised 81 stars for which we had complete data for $\teff$, 
 	\centering
 	\caption{The observables and their respective uncertainties for the 10 stars in sample of 81 stars. The whole table is available online.}
 	\label{tab:data}
-	\input{stars_inputs.tex}
+	\input{tables/stars_inputs.tex}
 \end{table*}
 
 \begin{figure}
@@ -406,7 +406,7 @@ The test dataset contained $\sim \num{2e6}$ stellar models evolved in the same w
 	\centering
 	\caption{The median error, $\mu_{1/2}$ and median absolute deviation of the error, $\sigma_\mathrm{MAD} = 1.4826\cdot\mathrm{median}(|E(\mathbb{Y}) - \mu_{1/2}|)$ for a given ANN output parameter, $\mathbb{Y}$ from the test dataset. The error, $E(\mathbb{Y})$, is given in the table header, where $\delta \mathbb{Y} = \widetilde{\mathbb{Y}} - \mathbb{Y}$.}
 	\label{tab:test}
-    \input{test_random}    
+    \input{tables/test_random.tex}    
 \end{table*}
 
 We found good agreement between the test dataset and ANN predictions, within typical observational uncertainties. We noted that the largest errors lay at the boundaries of the training data and in areas sparsely populated by the grid. This is apparent in Figure \ref{fig:test} where we plot the test error against each parameter. For example, the spread in error increases for $\metallicity_\mathrm{surf} < -0.5$ where training data is sparse at the edge of the grid. However, the accuracy is very good within the observed range covered by our sample of 81 dwarfs and subgiants. Hence, we chose the median absolute deviation (MAD) as an estimator of the spread in error because it is less sensitive to large errors at the grid boundary than the standard deviation.
@@ -603,7 +603,7 @@ For both the PP and MP models, we iterated with and without data for the Sun inc
     \centering
     \caption{Solar input data. The references correspond to the central values and the uncertainties are chosen to either be representative of the ANN accuracy or the spread of values in the literature (see text for details).}
     \label{tab:sun}
-    \input{sun_inputs.tex}
+    \input{tables/sun_inputs.tex}
 \end{table}
 
 \subsection{Sampling}
@@ -641,35 +641,35 @@ In Table \ref{tab:np}, we present results for the 65 APOKASC stars from the NP m
 	\centering
 	\caption{The median of the marginalised posterior samples for each parameter output by the NP model, with their respective upper and lower 68 per cent credible intervals. For the full table, see online.}
 	\label{tab:np}
-	\input{stars_outputs_NP.tex}
+	\input{tables/stars_outputs_NP.tex}
 \end{table*}
 
 \begin{table*}
 	\centering
 	\caption{The same as Table \ref{tab:np}, but for the PP model.}
 	\label{tab:pp}
-	\input{stars_outputs_PP.tex}
+	\input{tables/stars_outputs_PP.tex}
 \end{table*}
 
 \begin{table*}
 	\centering
 	\caption{The same as Table \ref{tab:np}, but for the PPS model.}
 	\label{tab:pps}
-	\input{stars_outputs_PPS.tex}
+	\input{tables/stars_outputs_PPS.tex}
 \end{table*}
 
 \begin{table*}
 	\centering
 	\caption{The same as Table \ref{tab:np}, but for the MP model.}
 	\label{tab:mp}
-	\input{stars_outputs_MP.tex}
+	\input{tables/stars_outputs_MP.tex}
 \end{table*}
 
 \begin{table*}
 	\centering
 	\caption{The same as Table \ref{tab:np}, but for the MPS model.}
 	\label{tab:mps}
-	\input{stars_outputs_MPS.tex}
+	\input{tables/stars_outputs_MPS.tex}
 \end{table*}
 
 Figure \ref{fig:unc-comp} compares the uncertainties in mass, radius and age for each of the models in this work, with those of the results for the same stars from \citetalias{Serenelli.Johnson.ea2017}. We saw a similar improvement in uncertainty between the NP and pooled models as with the synthetic stars in Figure \ref{fig:shrinkage}. We found that the statistical uncertainties in mass from the pooled models were reduced by a factor of $\sim 2$ over \citetalias{Serenelli.Johnson.ea2017} with a median of $2.5$ per cent. We also obtained smaller uncertainties in radius and age of $1.2$ and $12$ per cent respectively when pooling the stellar parameters.
@@ -678,17 +678,17 @@ Figure \ref{fig:unc-comp} compares the uncertainties in mass, radius and age for
     \centering
     \begin{subfigure}[b]{.33\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{../modelling/final_models/comparison/sigma_mass.png}
+        \includegraphics[width=\linewidth]{figures/sigma_mass.png}
         % \caption{Mass}
     \end{subfigure}%
     \begin{subfigure}[b]{.33\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{../modelling/final_models/comparison/sigma_rad.png}
+        \includegraphics[width=\linewidth]{figures/sigma_rad.png}
         % \caption{Radius}
     \end{subfigure}%
     \begin{subfigure}[b]{.33\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{../modelling/final_models/comparison/sigma_age.png}
+        \includegraphics[width=\linewidth]{figures/sigma_age.png}
         % \caption{Age}
     \end{subfigure}%
     \caption{Kernel density estimates (KDEs) of the distribution of statistical uncertainties in the results from each model compared with those of \citepalias{Serenelli.Johnson.ea2017} for the sample of APOKASC dwarfs and subgiants.}
@@ -703,7 +703,7 @@ We obtained values for the hyperparameters for each of the models and present th
 	\centering
 	\caption{Hyperparameter results for each model with the omission of $Y_P$.}
 	\label{tab:hparam_results}
-	\input{hyperparam_results.tex}
+	\input{tables/hyperparam_results.tex}
 \end{table*}
 
 Figure \ref{fig:corners-pp} shows the joint and marginal distributions (corner plot) output by the PP and PPS model. We see an anti-correlation between $\Delta Y / \Delta Z$ and $\mu_\alpha$, expected due to the degeneracy between the two parameters in the stellar evolutionary models. In Figure \ref{fig:corners-mp}, we also show the corner plot for the MP and MPS model output. Similarly, we see an anti-correlation between $\Delta Y / \Delta Z$ and $\mlt$.
@@ -711,12 +711,12 @@ Figure \ref{fig:corners-pp} shows the joint and marginal distributions (corner p
 \begin{figure*}
     \begin{subfigure}[b]{.5\linewidth}
         \centering
-        \includegraphics[width=\textwidth]{../modelling/final_models/population_results/partial_pool/DR14_ASPC/population/corner_plot_2.png}
+        \includegraphics[width=\textwidth]{figures/corner_plot_pp.png}
         % \caption{PP model (without solar data).}
     \end{subfigure}%
     \begin{subfigure}[b]{.5\linewidth}
         \centering
-        \includegraphics[width=\textwidth]{../modelling/final_models/population+sun_results/partial_pool/DR14_ASPC/population/corner_plot_2.png}
+        \includegraphics[width=\textwidth]{figures/corner_plot_pps.png}
         % \caption{PPS model (with solar data)}
     \end{subfigure}
     \caption{Corner plots showing the joint and marginalised sampled posterior distributions for the hyperparameters for the PP (left) and PPS (right) models. The vertical dashed lines give the 16th, 50th and 84th percentiles.}
@@ -726,12 +726,12 @@ Figure \ref{fig:corners-pp} shows the joint and marginal distributions (corner p
 \begin{figure*}
     \begin{subfigure}[b]{.5\linewidth}
         \centering
-        \includegraphics[width=\textwidth]{../modelling/final_models/population_results/max_pool/DR14_ASPC/population/corner_plot_2.png}
+        \includegraphics[width=\textwidth]{figures/corner_plot_mp.png}
         % \caption{MP model (without solar data).}
     \end{subfigure}%
     \begin{subfigure}[b]{.5\linewidth}
         \centering
-        \includegraphics[width=\textwidth]{../modelling/final_models/population+sun_results/max_pool/DR14_ASPC/population/corner_plot_2.png}
+        \includegraphics[width=\textwidth]{figures/corner_plot_mps.png}
         % \caption{MPS model (with solar data).}
     \end{subfigure}
     \caption{The same as Figure \ref{fig:corners-pp} but for the MP (left) and MPS (right) models.}
@@ -776,7 +776,7 @@ We present the helium enrichment relation resulting from the PPS model in Figure
 % FIGURE SHOWING HELIUM FOR PPS MODEL
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{../modelling/final_models/population+sun_results/partial_pool/DR14_ASPC/zi_yi_results_plot_2.png}
+    \includegraphics[width=\linewidth]{figures/zi_yi_results_plot.png}
     \caption{The results for initial helium fraction ($Y_\mathrm{init}$) against initial heavy-element fraction ($Z_\mathrm{init}$) for each star from the PPS model are shown by the black markers. The mean helium enrichment, $\mu_Y = Y_P + (\Delta Y / \Delta Z) Z_\mathrm{init}$ with its 68 per cent credible interval are shown in blue by a solid line and shaded region respectively. The population spread, $\mu_Y \pm \sigma_Y$ and its 68 per cent credible interval are shown in orange by a dashed line and shaded region respectively. The individual results from the NP model are shown by the light grey markers.}
     \label{fig:helium}
 \end{figure}
@@ -951,7 +951,7 @@ In Table \ref{tab:std} we give the scaling parameters used to standardise our tr
 \begin{table*}
     \caption{The median, $\mu_{1/2}$ and standard deviation, $\sigma$ for each parameter in the training data, used to standardise the dataset.}
     \label{tab:std}
-    \input{standardisation.tex}
+    \input{tables/standardisation.tex}
 \end{table*}
 
 \begin{figure}
@@ -1004,7 +1004,7 @@ In Figure \ref{fig:test-corners-pp}, we see that the PP model also recovers the 
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{../modelling/final_test_models/population_results/test_100/population/corner_plot_truths.png}
+    \includegraphics[width=\linewidth]{figures/corner_plot_pp_truths.png}
     \caption{Corner plot showing the marginalised and joint posterior distributions between the PP model hyperparameters for 100 synthetic stars. The true values are shown by the blue lines.}  
     \label{fig:test-corners-pp}   
 \end{figure}
@@ -1013,7 +1013,7 @@ Figure \ref{fig:test-corners-mp} shows the hyperparameter results for the MP mod
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{../modelling/final_test_models/population_results/test_max_pool/population/corner_plot_truths.png}
+    \includegraphics[width=\linewidth]{figures/corner_plot_mp_truths.png}
     \caption{The same as Figure \ref{fig:test-corners-pp} but for the MP model.}
     \label{fig:test-corners-mp} 
 \end{figure}
@@ -1078,7 +1078,7 @@ We found some differences between $\mlt$ from our solar model and solar calibrat
     \centering
     \caption{Solar results from the NP model. The second column shows the median marginalised posterior samples for each parameter with their respective upper and lower 68 per cent credible intervals.}
     \label{tab:sun-out}
-    \input{sun_outputs.tex}
+    \input{tables/sun_outputs.tex}
 \end{table*}
 
 % \begin{figure*}
@@ -1089,7 +1089,7 @@ We found some differences between $\mlt$ from our solar model and solar calibrat
 % \end{figure*}
 \begin{figure*}
     \centering
-    \includegraphics[width=\textwidth]{../modelling/final_models/sun_results/SUN/star/corner_plot_2.png}
+    \includegraphics[width=\textwidth]{figures/corner_plot_sun.png}
     \caption{A corner plot showing the sampled marginal and joint posterior distributions for the Sun as a part of the NP model.}
     \label{fig:sun-results}
 \end{figure*}
