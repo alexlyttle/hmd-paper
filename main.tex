@@ -158,14 +158,14 @@ asteroseismology -- stars: fundamental parameters -- stars: low-mass -- stars: o
 %%%%%%%%%%%%%%%%% BODY OF PAPER %%%%%%%%%%%%%%%%%%
 
 \section{Introduction}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%% INTRODUCTION %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%% INTRODUCTION %%%%%%%%%%%%%%%%%%
 
 The inference of stellar ages, masses, and radii has improved through the use of asteroseismology in recent years \citep[e.g. see the review by][]{Chaplin.Miglio2013}. Measuring the oscillation modes in stars using photometric time series data, from missions such as \emph{CoRoT} \citep{Baglin.Auvergne.ea2006}, \emph{Kepler} \citep{Borucki.Koch.ea2010}, and \emph{TESS} \citep{Ricker.Winn.ea2015} has given us new insights into the structure and evolution of stars \citep{Garcia.Ballot2019}. Recent examples include a deeper understanding of stellar structure \citep{Verma.Raodeo.ea2017}, chronology of a Milky Way merger \citep{Chaplin.Serenelli.ea2020}, and classifying exoplanetary systems \citep{Huber.Chaplin.ea2019, Tayar.Claytor.ea2020}. Several studies used grids of stellar models with constraints from asteroseismology to produce catalogues of precise stellar parameters \citep{Pinsonneault.Elsworth.ea2014, SilvaAguirre.Lund.ea2017}. However, with increasing precision on fundamental parameters inferred from stellar models with asteroseismology, extra care should be taken to ensure that we are accounting for uncertainty in our choice of stellar physics.
 
-Typically, stars are modelled on a star-by-star basis with estimates of stellar properties including some assumptions handled by simple scaling relations and solar calibrations. % assumptions made about the bulk physical quantities based on empirical relations or solar calibrations. 
-For instance, a helium ($Y$) to heavy-element ($Z$) enrichment ratio ($\Delta Y / \Delta Z$) and mixing-length theory parameter ($\mlt$) are often assumed. However, there has been little effort to account for the population distribution of such quantities. Assuming values for $Y$ and $\mlt$ can result in inaccurate inference and systematics on the inferred stellar parameters \citep{Valle.DellOmodarme.ea2015}. Independently modelling $Y$ and $\mlt$ can also be computationally demanding and requires high-precision observations in order to return meaningful stellar properties.
+Typically, stars are modelled on a star-by-star basis with estimates of stellar properties including some assumptions handled by simple scaling relations and solar calibrations. For instance, a helium ($Y$) to heavy-element ($Z$) enrichment ratio ($\Delta Y / \Delta Z$) and mixing-length theory parameter ($\mlt$) are often assumed. However, there has been little effort to account for the population distribution of such quantities. Assuming values for $Y$ and $\mlt$ can result in inaccurate inference and systematics on the inferred stellar parameters \citep{Valle.DellOmodarme.ea2015}. Independently modelling $Y$ and $\mlt$ can also be computationally demanding and requires high-precision observations in order to return meaningful stellar properties.
 
 In this work, we apply the method of Davies et al. (in prep.) to determine stellar properties for a sample of \emph{Kepler} dwarfs and subgiants using a hierarchical Bayesian model (HBM). With an HBM, we introduce population-level distributions for $Y$ and $\mlt$ to encode prior information throughout the sample. We will show that when an HBM is used, we can increase the precision of inferred masses, radii, and ages despite increasing the number of free parameters.
 
@@ -177,35 +177,24 @@ The widely used mixing-length theory of convection, parametrised by $\mlt$, has 
 
 Our HBM requires a way to map from the stellar initial (or bulk) properties to predict observables. We can achieve this with a large grid of stellar evolutionary models. However, a discrete grid can produce inaccurate posterior distributions, limited to the grid resolution. Increasing the resolution is computationally demanding, especially when scaling to higher input dimensions. One solution is to interpolate the stellar models, as is common in the isochrone-fitting method \citep[see e.g.][]{Berger.Huber.ea2020}. However, interpolation can become computationally expensive at high input dimensions and grid size, and evaluating the likelihood using modern Bayesian sampling techniques is slow. Therefore, we use machine learning to map stellar model inputs to observables to provide a fast way to sample the HBM. In this work, we train an artificial neural network (ANN) on a large grid of stellar models. There have been similar applications of ANNs in asteroseismology \citep{Verma.Hanasoge.ea2016, Bellinger.Angelou.ea2016, Hon.Stello.ea2017, Hon.Stello.ea2018a, Hendriks.Aerts2019} but not yet in the context of an HBM. Using the machine learning speed-up, we demonstrate a scalable method for obtaining fundamental stellar parameters.
 
-% PARAGRAPH OUTLINE OF PAPER.
 In Section \ref{sec:data}, we describe the data for the sample of 81 \emph{Kepler} dwarfs and subgiants studied in this work. We then present the methods in Section \ref{sec:meth} for which we produced a large grid of stellar evolutionary models to use as training data for an ANN (see Sections \ref{sec:grid} and \ref{sec:ann} respectively). We use the ANN as an emulator in a series of statistical models described in Section \ref{sec:hbm} to model the sample and present our results in Section \ref{sec:res}. Finally, in Section \ref{sec:dis} we discuss the results from each model and compare them to results for the sample of stars in the literature.
 
 \section{Data}\label{sec:data}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%% DATA %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%% DATA %%%%%%%%%%%%%%%%%%%%%%
 
 For this study, we selected the sample of 415 stars from the first APOKASC catalogue of dwarfs and subgiants \citep[][hereafter \citetalias{Serenelli.Johnson.ea2017}]{Serenelli.Johnson.ea2017}. This sample provides an extensive set of dwarfs and subgiant stars with asteroseismic detections observed by the \emph{Kepler} mission. \citetalias{Serenelli.Johnson.ea2017} used grid-based modelling to determine the ages ($\tau$), masses ($M$), radii ($R$), and surface gravity ($\log g$) of stars in the sample, using global asteroseismic parameters, effective temperature ($\teff$), and metallicity ($\metallicity$) as inputs. 
 
 Using five independent pipelines, \citetalias{Serenelli.Johnson.ea2017} determined values for global asteroseismic parameters -- the large frequency separation $\dnu$ and the frequency at maximum power, $\numax$ with median uncertainties of 1.7 per cent and 4 per cent respectively. We chose to adopt the $\dnu$ determined in their work as inputs for our method. They also used $\metallicity$ published in Data Release 13 \citep[DR13;][]{Albareti.AllendePrieto.ea2017} of the APOGEE stellar abundances pipeline \citep[ASPCAP;][]{GarciaPerez.AllendePrieto.ea2016} with uncertainties of \SI{0.1}{\dex}. For their preferred set of results, they adopted $\teff$ from the Sloan Digital Sky Survey (SDSS) \emph{griz}-band photometry \citep{Pinsonneault.An.ea2012} with a median uncertainty of \SI{70}{\kelvin}.
 
-% WJC - cut may exclude more metal-rich stars?
 We removed more evolved stars from the APOKASC sample by cutting those with $\log g < \SI{3.8}{\dex}$. We then kept stars within 1-$\sigma$ of $-0.5 < \metallicity < \SI{0.5}{\dex}$ to remove metal-poor and -rich stars. Main sequence stars with $M \gtrsim \SI{1.2}{\solarmass}$ are understood to have a convective, hydrogen-burning core, with some dependence on the chemical composition and choice of stellar physics \citep{Appourchaux.Antia.ea2015}. Stellar models with a convective core require the treatment of extra stellar physics such as overshooting, which is beyond the scope of this work. Therefore, we keep only stars with masses within 1-$\sigma$ of \SIrange{0.8}{1.2}{\solarmass} from the preferred set of results of \citetalias{Serenelli.Johnson.ea2017}.
 
 Following cuts to the sample, we adopted updated ASPCAP spectroscopic metallicities, \metallicity, from Data Release 14 \citep[DR14;][]{Blanton.Bershady.ea2017} which had a median uncertainty of \SI{0.07}{\dex}. We also chose to adopt $\teff$ from the same catalogue to be internally consistent. We note that our chosen effective temperature scale is offset from the photometric temperature scale of \citetalias{Serenelli.Johnson.ea2017} by approximately $- \SI{170}{\kelvin}$ with a dispersion of $\sim \SI{120}{\kelvin}$. The median uncertainty in our adopted ASPCAP $\teff$ was \SI{125}{\kelvin} which is compatible with the dispersion observed.
 
-% We derived stellar surface gravity, $g$ using the asteroseismic scaling relation for the frequency at maximum power, $\numax$ [CITE],
-% % 
-% \begin{equation}
-%     \log g \approx \log{g_\odot} + \log\left( \frac{\numax}{\numax_{,\odot}} \right) - \frac12 \log\left(\frac{\teff}{{\teff}_{,\odot}}\right),
-% \end{equation}
-% %
-% where we adopted solar reference values of $\numax_{,\odot} = \SI{3090(30)}{\micro\hertz}$
-% \citep{Huber.Bedding.ea2011} $\log g_\odot = \SI{4.44}{\dex}$ and ${\teff}_{,\odot} = \SI{5777}{\kelvin}$.
-
 To provide a means of calculating luminosities, we used \emph{Gaia} Data Release 2 (DR2) parallaxes \citep{GaiaCollaboration.Prusti.ea2016, GaiaCollaboration.Brown.ea2018}. We cross-matched the remaining sample with the DR2 catalogue, taking the nearest neighbours within a 4 arcsec radius. Although DR2 parallaxes have improved upon the DR1 values at the time of \citetalias{Serenelli.Johnson.ea2017}, there was still evidence for a zero-point offset \citep{Lindegren.Hernandez.ea2018}. We adopted a global offset of \SI{0.05}{\milli\aarcsec}, in the sense that DR2 parallaxes were underestimated, representative of values obtained in the literature \citep[see e.g.][]{Riess.Casertano.ea2018, Zinn.Pinsonneault.ea2019, Hall.Davies.ea2019, Chan.Bovy2020}. We then cross-matched our sample with the Two-Micron All Sky Survey \citep[2MASS;][]{Skrutskie.Cutri.ea2006} to obtain \emph{K\textsubscript{S}}-band (\SI{2.16}{\micro\metre}) photometry.
 
-% Return here to see if these two paragraphs may be merged.
 We determined luminosities, $L$ for the sample using the direct method of \textsc{isoclassify} \citep{Huber.Zinn.ea2017, Berger.Huber.ea2020} with \emph{K\textsubscript{S}}-band photometry, \emph{Gaia} DR2 parallaxes, ASPCAP $\metallicity$ and $\teff$, and asteroseismic $\log g$ as inputs. This involved computing absolute \emph{K\textsubscript{S}}-band magnitudes using the \emph{Gaia} DR2 parallaxes and extinctions determined by the 3D galactic reddening maps of \citet{Green.Schlafly.ea2018}. We determined absolute bolometric magnitudes by interpolating the MIST bolometric correction tables as a function of $\teff$, $\log g$ and $\metallicity$ \citep{Dotter2016, Choi.Dotter.ea2016}. We adopted the uncertainty of \SI{0.02}{\magnitude} assumed by \textsc{isoclassify} for both the extinctions and bolometric corrections, corresponding to typical systematic errors in extinction maps and bolometric fluxes \citep[e.g.][]{Zinn.Pinsonneault.ea2019a,Tayar.Claytor.ea2020}. We obtained luminosities for the sample with a median uncertainty of 3.4 per cent.
 
 The final sample comprised 81 stars for which we had complete data for $\teff$, $\metallicity$, $\dnu$, and $L$ to use as inputs for our stellar modelling method -- see Table \ref{tab:data}. In Figure \ref{fig:data}, we show the Hertzspring-Russell diagram for the sample plot in context with a series of stellar evolutionary tracks at solar metallicity.
@@ -225,21 +214,20 @@ The final sample comprised 81 stars for which we had complete data for $\teff$, 
 \end{figure}
 
 \section{Methods}\label{sec:meth}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%% METHODS %%%%%%%%%%%%%%%%%%%%%
 
-% Our principle goal was to improve inference of fundamental stellar parameters for our sample of low-mass stars. To achieve this, we constructed a hierarchical Bayesian model (HBM) which utilises a prior assumption of the population distribution to share information between the stars. Based on the work of Davies et al. (in prep.), our HBM is a generative model which requires a function to map bulk stellar parameters to their observables.
-
 Firstly, we used a stellar evolutionary code to compute a grid of models to predict observable quantities (see Section \ref{sec:grid}). In Section \ref{sec:ann}, we describe a method to replace the grid of stellar models with a smooth function approximation. Here, we trained an ANN on the grid of stellar models to map input parameters to output observables. We then constructed three Bayesian models in Section \ref{sec:hbm} which each sampled the trained ANN to estimate stellar fundamental parameters as described in Section \ref{sec:sampling}. Evaluation of the ANN gradient is required during training. Consequently, estimating the gradient of the model likelihood is fast and simple when the observables are generated by an ANN. Hence, we open up the possibility of using a Hamiltonian Monte Carlo (HMC) algorithm -- for example, using the No-U-Turn Sampler \citep[NUTS;][]{Hoffman.Gelman2014} -- which requires the gradient to sample the model posterior. Once we had tested the accuracy of the model on a sample of synthetic stars, we evaluated each model on the subset of the APOKASC catalogue selected in Section \ref{sec:data}.
 
 \subsection{Grid of stellar models}\label{sec:grid}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% TANDA LI - GRID OF STELLAR MODELS %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%% GRID OF STELLAR MODELS -- TL %%%%%%%%%%
 
 We built a stellar model grid to use in training the ANN. The grid includes four independent model inputs: stellar mass ($M$), initial helium fraction ($Y_{\rm init}$), initial metallicity ($\mathrm{[M/H]}_\mathrm{init}$), and the mixing-length parameter ($\mlt$). Ranges and grid steps of the four model inputs are summarised in Table \ref{tab:grid}. We increased the resolution at higher $\metallicity$ to give a more consistent resolution in $Z_\mathrm{init}$ which we used as an ANN input in Section \ref{sec:ann}. We computed each stellar evolutionary track from the Hayashi line to the base of red-giant branch defined here by $\log g$ = 3.6 dex. 
-%We also computed evolutionary tracks with input values at the midpoint between points on the grid for validating the ANN.
 We also computed an additional set of evolutionary tracks, with input values chosen randomly within the range of the regular grid, to use when testing the accuracy of the ANN.
 
 \begin{table}
@@ -259,13 +247,7 @@ We also computed an additional set of evolutionary tracks, with input values cho
         \midrule
         \textbf{Total} & & & \num{17220}\\
         \bottomrule
-        %Other physics & \multicolumn{2}{Scheme}\\
-        %\hline
-        %Diffusion & \multicolumn{2}{Yes}\\
-        %Overshooting & \multicolumn{2}{N/A}\\
-        %\hline
-%     \multicolumn{3}{p{.4\textwidth}}{$^{\rm a}Y_0$ = 0.249 and $\frac{\Delta Y}{\Delta Z}$ = 1.33 was adopted.}  
-	\end{tabular}
+    \end{tabular}
 \end{table}
 
 \subsubsection{Stellar models and input physics}\label{subsec:stellar_model}
@@ -300,9 +282,10 @@ Theoretical stellar oscillations were calculated with the \textsc{GYRE} code (ve
 We chose to ignore the well known, yet poorly characterised impact of modelled oscillation mode inaccuracies in the near-surface region of the star \citep{Kjeldsen.Bedding.ea2008, Ball.Gizon2014, Sonoi.Samadi.ea2015}. This typically presents only a small effect compared to observational uncertainties when considering the average large frequency spacing, $\dnu$. Additionally, there may be further inaccuracies in the modelled $\dnu$ because of variations in p mode frequencies with stellar activity \citep{Chaplin.Elsworth.ea2007, Garcia.Mathur.ea2010, Kiefer.Schad.ea2017}. Therefore, a thorough treatment of systematic uncertainties in $\dnu$ is instead left to future work (Carboneau et al. in preparation). % This may need more         
 
 \subsection{Artificial neural network}\label{sec:ann}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% ARTIFICIAL NEURAL NETWORK %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%% ARTIFICIAL NEURAL NETWORK %%%%%%%%%%%%
 
 Once we constructed our grid of models, we needed a way in which we could continuously sample the grid for use in our statistical model. We opted to train an ANN. The ANN is advantageous over interpolation because it scales well with dimensionality, training and evaluation is fast, and gradient evaluation is easy due to its roots in linear algebra \citep{Haykin2007}. We trained an ANN on the data generated by the grid of stellar models to map fundamentals to observables. Firstly, we split the grid into a \emph{train} and \emph{validation} dataset for tuning the ANN, as described in Section \ref{sec:train}. We then tested a multitude of ANN configurations and training data inputs, repeatedly evaluating them with the validation dataset in Section \ref{sec:opt}. In Section \ref{sec:test}, we reserved a set of randomly generated, off-grid stellar models as our final \emph{test} dataset to evaluate the approximation ability of the best-performing ANN independently from our train and validation data. Here, we briefly describe the theory and motivation behind the ANN.
 
@@ -339,19 +322,20 @@ To fit the ANN, we used a set of training data, $\boldsymbol{\mathbb{D}}_\mathrm
 We trained the ANN using \textsc{TensorFlow} \citep{Abadi.Barham.ea2016}. We varied the architecture, number of batches, choice of loss function, optimizer, and regularisation during the optimisation phase. For each set of ANN parameters, we initialised the ANN with a random set of weights and biases and minimized the loss over a given number of \emph{epochs}. An epoch is defined as one iteration through the entire training dataset, $\boldsymbol{\mathbb{D}}_\mathrm{train}$. We tracked the loss for each ANN using an independent validation dataset to determine the most effective choice of ANN parameters (see Section \ref{sec:opt}).
 
 \subsubsection{Train, validation, and test data}\label{sec:train}
-%%%%%%%%%%%%%%%%%%%%%%%%
-%%% TRAIN-TEST SPLIT %%%
-%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%% TRAIN-TEST SPLIT %%%%%%%%%%%%%%%%
 
 We built the train and validation datasets from the outputs of the grid of stellar models in Section \ref{sec:grid}. This included the input parameters: $M$, $\mlt$, $Y_\mathrm{init}$, and the initial heavy-elements fraction, $Z_\mathrm{init}$. We also included the $\teff$, $\log g$, $\dnu$, stellar age ($\tau$), radius ($R$), surface metallicity ($\metallicity_\mathrm{surf}$), and other chemical composition information generated by the models. We determined the fractional main sequence (MS) lifetime, $f_{\mathrm{MS}} = \tau / \tau_{\mathrm{MS}}$, of each evolutionary track by taking $\tau_{\mathrm{MS}}$ as the age when the central hydrogen fraction, $X_c < 0.01$. We then cut data where $f_{\mathrm{MS}} < 0.01$ to remove points on the grid prior to the MS. Once we had refined the data from the grid of models, we randomly sampled \num{7.736e6} points to use as the training dataset, with the remaining $\sim \num{2e6}$ points given to the validation dataset. We varied our choice of ANN input and output parameters among those available in the dataset during tuning (see Section \ref{sec:opt}).
 
-% Additionally, we produced a test dataset of $\sim \num{2e6}$ stellar models evolved using \textsc{MESA}. Values for the initial $M$, $\metallicity$, $Y$ and $\mlt$ were chosen at the midpoint of the grid parameters described in Table \ref{tab:grid} such that they traced evolutionary tracks between those in the train and validation dataset. We prepared this dataset in the same way as the training set, but also constrained it to $\tau < \SI{15}{\giga\year}$ because we consider ages above $\sim \SI{15}{\giga\year}$ unphysical and such points are sparse in the training data. The test dataset was set aside and evaluated on the final ANN.
 Additionally, we produced a test dataset of $\sim \num{2e6}$ stellar models evolved using \textsc{MESA}. Values for the initial $M$, $\metallicity$, $Y$, and $\mlt$ were chosen randomly within the range of grid parameters described in Table \ref{tab:grid} such that they spanned the breadth of the grid in an unbiased manner. We prepared this dataset in the same way as the training set, but also constrained it to $\tau < \SI{15}{\giga\year}$ because we consider ages above $\sim \SI{15}{\giga\year}$ unphysical and such points are sparse in the training data. The test dataset was set aside and evaluated on the final ANN.
 
 \subsubsection{Tuning}\label{sec:opt}
-%%%%%%%%%%%%%%%%%%%%
-%%% OPTIMIZATION %%%
-%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%% OPTIMIZATION %%%%%%%%%%%%%%%%%%
 
 We trained an ANN to reproduce stellar observables according to our choice of physics with greater accuracy than typical observational precisions. We experimented with a variety of ANN parameter choices, such as the architecture, activation function, optimization algorithm, and loss function. We tuned the ANN parameters by varying them in both a grid-based and heuristic approach, each time evaluating the accuracy using the validation dataset.
 
@@ -391,11 +375,11 @@ We compared the choice of two error functions: mean squared error (MSE) and mean
 After extensive tuning, we opted for an ANN with $N=128$ neurons in each of $H=6$ hidden layers. Each of the hidden layers used an ELU activation function and L2 weight regularisation with $\lambda = \num{1e-6}$. We trained the ANN for \num{50000} epochs with a \num{500} training data batches each containing \num{15472} input-output pairs. To fit the ANN, we used an SGD optimiser with an initial learning rate of \num{1e-4} and momentum of \num{0.999} with an MAE loss function. Training took $\sim \SI{48}{\hour}$ on an NVidia Tesla V100 graphics processing unit (GPU).
 
 \subsubsection{Testing}\label{sec:test}
-%%%%%%%%%%%%%%%%%%
-%%% Validation %%%
-%%%%%%%%%%%%%%%%%%
 
-% The test dataset contained $\sim \num{2e6}$ models evolved in the same way as the training dataset but with initial conditions at the midpoint of those in the grid. We made predictions for the test dataset, deriving luminosity from the output radius and effective temperature, using the final trained ANN as described in Section \ref{sec:opt}. We then evaluated the accuracy of the ANN by taking the difference between the test truth and ANN prediction, $x_\mathrm{true} - x_\mathrm{pred}$. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%% Validation %%%%%%%%%%%%%%%%%%%
+
 The test dataset contained $\sim \num{2e6}$ stellar models evolved in the same way as the training dataset, but with initial conditions chosen randomly across the range of the grid. We made predictions for the test dataset, deriving luminosity from the output radius and effective temperature, using the final trained ANN as described in Section \ref{sec:opt}. We then evaluated the accuracy of the ANN by taking the difference between the test truth and ANN prediction, $x_\mathrm{true} - x_\mathrm{pred}$. 
 
 \begin{table*}
@@ -416,12 +400,11 @@ To represent the accuracy of the ANN, we present the median, $\mu_{1/2}$ and MAD
     \label{fig:test}
 \end{figure}
 
-% To further justify the use of an ANN over interpolation, we timed a linear, multi-dimensional interpolator on small samples of size $n$ from the training dataset. We used the Quickhall algorithm via the \textsc{scipy} package, for which the execution time scales by $n^{\lfloor d/2 \rfloor}$ for $d$ dimensions \citep{Barber.Dobkin.ea1996}. In our case $d=5$, as such we found that interpolating the entire training dataset would take $\sim \SI{2}{\year}$ using the same machine on which we trained the ANN. Furthermore, we interpolated a small region of the training dataset and evaluated its performance in the same region of the validation dataset. Taking the standard deviation of the error, we found that linear interpolation performed worse than the ANN by roughly a factor of 2.
-
 \subsection{Statistical models}\label{sec:hbm}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% HIERARCHICAL BAYESIAN MODEL %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%% HIERARCHICAL BAYESIAN MODEL %%%%%%%%%%%
 
 We devised three Bayesian models, each with varying levels of parameter sharing (pooling) between stars in the population. Initially, we tested the models and demonstrated reduction of statistical uncertainties in the stellar fundamental parameters by analysing a random sample of 100 synthetic stars modelled using \textsc{MESA}. Then, we applied the models to the sample of stars in Table \ref{tab:data} (with and without solar data for two of the models) and compared the results with that of \citetalias{Serenelli.Johnson.ea2017}.
 
@@ -486,9 +469,10 @@ It follows that the posterior PDF for a population of $N_\mathrm{stars}$ stars f
 where $\boldsymbol{\Theta}$ is the matrix of model parameters and $\boldsymbol{D}$ is the matrix of observables. A probabilistic graphical model (PGM) of the NP model can be seen inside the grey box of Figure \ref{fig:pgm}, without the arrow connecting $Z_\mathrm{init}$ to $Y_\mathrm{init}$. We ignore the nodes outside the box because these correspond the the PP model described next.
 
 \subsubsection{Partial-pooled model}\label{sec:pp}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% PARTIALLY POOLED MODEL %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%% PARTIALLY POOLED MODEL %%%%%%%%%%%%%
 
 Sharing, or pooling parameters between stars in a population can improve the uncertainties on stellar fundamentals by encoding our prior knowledge of their distribution in a population. We constructed a hierarchical model, which builds upon the NP model by introducing population-level \emph{hyperparameters}. Specifically, we chose to describe initial helium and $\mlt$ by partially-pooling them.
 
@@ -556,9 +540,10 @@ We produced a PGM for the model, depicted in Figure \ref{fig:pgm}. The hyperpara
 %
 
 \subsubsection{Max-pooled model}\label{sec:mp}
-%%%%%%%%%%%%%%%%%%%%%%%%
-%%% MAX-POOLED MODEL %%%
-%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%% MAX-POOLED MODEL %%%%%%%%%%%%%%%%
 
 We built another hierarchical model similar to the PP model except that $\mlt$ is max-pooled (MP). In this model, we assumed that $\mlt$ must be the same value for every star in the sample, but still allowed it to freely vary on a population-level. Thus the hyperparameters are now, $\boldsymbol{\phi} = \{\Delta Y/\Delta Z, Y_P, \sigma_Y, \mlt\}$. The posterior distribution of the model takes the same form as in Equation \ref{eq:hbmbayes} except that the mixing-length theory parameter for the $i$-th star is,
 %
@@ -570,26 +555,10 @@ where,
 \begin{equation}
     \mlt \sim 1.5 + \mathcal{B}(1.2, 1.2),
 \end{equation}
-% %
-% \begin{equation}
-%     p(\boldsymbol{\alpha}_\mathrm{MLT} | \mlt) = \prod_{i=1}^{N_\mathrm{stars}} \delta (\alpha_{\mathrm{MLT}, i} | \mlt)
-% \end{equation}
-% %
-% where $\delta(x | \alpha)$ is defined as,
-% %
-% \begin{equation}
-%     \delta(x | \alpha) = \begin{cases}
-%         + \infty, &\quad x = \alpha\\
-%         0, &\quad x \neq \alpha
-%     \end{cases}
-% \end{equation}
+%
 chosen such that $\mlt$ is confined to the boundaries of the grid of stellar models ($1.5 < \mlt < 2.5$).
 
 \subsection{The Sun as a star}\label{sec:sun}
-
-% We sampled the posterior for each model using the NUTS of PyMC4 (a new version of PyMC3 based on Tensorflow [CITE PYMC3 AND TENSORFLOW]). Initially, we modelled each star individually in order to identify stars outside the grid range and highlight other sampling problems. We flagged stars with output parameters near the gird boundaries. We also flagged stars with many model divergences, indicative of problems during sampling. Then, we modelled the remaining sample of 65 stars using each of the NP, PP, PPS, MP and MPS models. When we encountered problems with model convergence in the pooled models, we removed stars with large values of the Gelman-Rubin diagnostic \citep{Gelman.Rubin1992} and reran.
-
-% Modelling stars separately allowed us to identify poorly sampled posteriors, whether the model indicated a fit outside the given input range, or other sampling issues. Once a refined sample was chosen, we modelled the sample all together as a natural application of the ANN through the use of batching. We modelled the ANN inputs as independent distributions, from which the random variables were batched together and passed through the ANN to produce predictions for each star. 
 
 Pooling parameters in an HBM allows us to use the Sun as a calibrator in a unique way. Rather than calibrating our model physics to the Sun and then assuming the calibrated parameters across our sample, we can include the Sun as a part of the same population as our sample of stars. If we assume $Y_\mathrm{init}$ and $\mlt$ for the Sun are a part of the same prior distribution as for the rest of the sample, then we can simply add solar observables to our model inputs.
 
@@ -615,17 +584,10 @@ Since our initial sample was chosen based on masses from \citetalias{Serenelli.J
 Out of the remaining 65 stars with results from the NP model, 2 stars were dropped from the PP model. A consequence of partially pooling parameters is that a population spread, $\sigma$ allows for individual parameters to vary outside of the prior range given to the population mean, $\mu$. In this case, individual stellar $\mlt$ was allowed to vary outside the range for which the ANN was valid if $\sigma_\alpha$ was large. The 2 removed stars happened to have high likelihoods outside of the valid $\mlt$ range. We found that removing the same 2 stars from the other models made negligible difference to the results, so we leave a solution to this problem to future work. Naturally, we did not see the same issue in the MP model, so we proceeded with modelling the same 65 stars as with the NP model.
 
 \section{Results}\label{sec:res}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%% RESULTS %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% THIS IS RUSHED NEED TO TAKE MORE TIME OR EVEN PUT IN METHODS SECTION
-
-% We obtained results for the models described above by sampling the posterior using the NUTS algorithm implemented in \textsc{PyMC4} -- a new version of \textsc{PyMC3} \citep{Salvatier.Wiecki.ea2016} based on \textsc{TensorFlow} \citep{Abadi.Barham.ea2016}. We took \num{20000} samples split across \num{10} MCMC chains and computed summary statistics for each parameter in the model. Stars which were identified to be less than 1-$\sigma$ from the boundaries of the prior were dropped from the sample and the model was rerun. We also dropped stars with problems during tuning where appropriate, using the Gelman-Rubin diagnostic \citep[$\hat{r}$;][]{Gelman.Rubin1992}. We settled on results from each run when $\hat{r} < 1.04$ for all parameters.
-
-% Initially, we created a random synthetic population of stars using \textsc{MESA} to test ability of the method to recover stellar properties according to our choice of model physics and population priors. We tested the NP, PP and MP models. Since our sample was fictitious, it would not have been appropriate to include solar data. We summarise the results for the synthetic stellar parameters and hyperparameters in Appendix \ref{sec:test-stars}. We found that the models were able to recover the true synthetic properties accurately, with increased precision when pooling parameters.
-
-% Then, we ran the models with the APOKASC sample collated in Section \ref{sec:data}. Here, we included runs for the PPS and MPS models to test the effect of the addition of the Sun to the population. We summarise the results for the APOKASC sample in Section \ref{sec:apk-results}.
+%%%%%%%%%%%%%%%%%%%% RESULTS %%%%%%%%%%%%%%%%%%%%%
 
 In this section, we present the results for each of the NP, PP, and MP models with the sample of 81 APOKASC dwarfs and subgiants as inputs. We also present the results for the PPS and MPS models which include the Sun as a star in the population. Firstly, we show the reduction in age, mass and radius uncertainty with the addition of pooling in Section \ref{sec:param-results}. We then show the results for model hyperparameters in Section \ref{sec:hparam-results} where we infer the initial helium abundance and mixing-length parameter distribution in the sample.
 
@@ -685,12 +647,10 @@ Figure \ref{fig:corners-pp} shows the joint and marginal distributions (corner p
     \begin{subfigure}[b]{.5\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/corner_plot_pp.png}
-        % \caption{PP model (without solar data).}
     \end{subfigure}%
     \begin{subfigure}[b]{.5\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/corner_plot_pps.png}
-        % \caption{PPS model (with solar data)}
     \end{subfigure}
     \caption{Corner plots showing the joint and marginalised sampled posterior distributions for the hyperparameters for the PP (left) and PPS (right) models. The vertical dashed lines give the 16th, 50th and 84th percentiles.}
     \label{fig:corners-pp}
@@ -700,51 +660,16 @@ Figure \ref{fig:corners-pp} shows the joint and marginal distributions (corner p
     \begin{subfigure}[b]{.5\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/corner_plot_mp.png}
-        % \caption{MP model (without solar data).}
     \end{subfigure}%
     \begin{subfigure}[b]{.5\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/corner_plot_mps.png}
-        % \caption{MPS model (with solar data).}
     \end{subfigure}
     \caption{The same as Figure \ref{fig:corners-pp} but for the MP (left) and MPS (right) models.}
     \label{fig:corners-mp}
 \end{figure*} 
 
 We present the helium enrichment relation resulting from the PPS model in Figure \ref{fig:helium}. In this figure, we plot the individual results for $Y_\mathrm{init}$ and $Z_\mathrm{init}$ for each of the stars from the NP and PPS models. This is an example of shrinkage in the HBM; the estimates for individual stellar parameters move towards the mean of the population when they are pooled.
-
-% The helium hyperparameters were reasonably consistent between models excluding the Sun. We found the slope of the enrichment law to be $\Delta Y/\Delta Z \sim 1.6$ for MP and PP which is consistent with other values in the literature [CITE]. When we introduce the Sun, we see the slope reduces to $\Delta Y/\Delta Z \lesssim 1$. The addition of the Sun is more obvious in the MPS model, yet the similar $\sigma_Y$ between all the models implies that the initial helium of the Sun is consistent with the spread in helium among the rest of the sample. In Figure \ref{fig:helium}, we show random samples from the hyperparameter posteriors for helium. Here, the smaller $\Delta Y / \Delta Z$ for the models including the Sun is evident, especially in the MPS model. We also note the anti-correlation between $\Delta Y / \Delta Z$ and $\mu_\alpha$ or $\mlt$ visible in the joint posterior distributions plot in Figure \ref{fig:corners}.
-
-% We found very little difference in results for $\mu_\alpha$ and $\alpha_\mathrm{MLT}$ between the PP and MP models respectively. However, when we added the sun, both the PPS and MPS models yielded significantly different results. The MPS model obtained a global value of $\mlt = 2.09 \pm 0.03$, whereas the PPS model found $\mu_\alpha = 1.90 \pm 0.09$ with $\sigma_\alpha = 0.13_{-0.05}^{+0.06}$. When we modelled the Sun separately, it yielded a value of $\mlt = 2.11 \pm 0.01$ which is far from $\mlt = 1.72_{-0.07}^{+0.08}$ obtained by the MP model. When we partially pooled $\mlt$ without the Sun, allowing for a population mean and spread, we get $\mu_\alpha = 1.74_{-0.07}^{+0.08}$ and $\sigma_\alpha = 0.06_{-0.03}^{+0.05}$, which is consistent with the MP model. However, when we add the Sun, the PPS model copes with the difference between the Solar $\mlt$ and the rest of the sample by doubling the spread in $\mlt$ over the PP model. The larger spread in the PPS model is apparent in Figure \ref{fig:mlt} which shows hyperparameter posterior samples for the two PP models.
-
-% We found that including the sun in our PP and MP models systematically shifted the median ages of the sample by about \SI{+ 0.5}{\giga\year} and \SI{+ 1.0}{\giga\year} respectively. This is a direct result of the solar model favouring a higher $\mlt$ and lower $Y_\mathrm{init}$ than the rest of the sample. Partially pooling the sun with the rest of the sample copes with this better by accounting for a population spread in the parameters, hence the smaller difference with and without the Sun.
-
-% FIGURES SHOWING HELIUM FOR ALL MODELS
-% \begin{figure*}
-%     \begin{subfigure}[b]{.5\linewidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{../modelling/final_models/population_results/partial_pool/DR14_ASPC/zi_yi_results_plot.png}
-%         \caption{PP}
-%     \end{subfigure}%
-%     \begin{subfigure}[b]{.5\linewidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{../modelling/final_models/population+sun_results/partial_pool/DR14_ASPC/zi_yi_results_plot.png}
-%         \caption{PPS}
-%     \end{subfigure}
-
-%     \begin{subfigure}[b]{.5\linewidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{../modelling/final_models/population_results/max_pool/DR14_ASPC/zi_yi_results_plot.png}
-%         \caption{MP}
-%     \end{subfigure}%
-%     \begin{subfigure}[b]{.5\linewidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{../modelling/final_models/population+sun_results/max_pool/DR14_ASPC/zi_yi_results_plot.png}
-%         \caption{MPS}
-%     \end{subfigure}
-%     \caption{The results for initial helium against initial heavy-element fraction for each star. 100 random samples from the posterior for the population mean, $\mu_Y = Y_P + (\Delta Y / \Delta Z) Z_\mathrm{init}$ and spread, $\mu_Y \pm \sigma_Y$ are shown in red and grey respectively. The Sun is shown by the solar symbol, $\odot$ in yellow for the models which included the Sun.}
-%     \label{fig:helium}
-% \end{figure*}
 
 % FIGURE SHOWING HELIUM FOR PPS MODEL
 \begin{figure}
@@ -754,34 +679,8 @@ We present the helium enrichment relation resulting from the PPS model in Figure
     \label{fig:helium}
 \end{figure}
 
-% \begin{figure*}
-%     \begin{subfigure}[b]{.5\linewidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{../modelling/final_models/population_results/partial_pool/DR14_ASPC/mlt_results_plot.png}
-%         \caption{PP}
-%     \end{subfigure}%
-%     \begin{subfigure}[b]{.5\linewidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{../modelling/final_models/population+sun_results/partial_pool/DR14_ASPC/mlt_results_plot.png}
-%         \caption{PPS}
-%     \end{subfigure}
-%     \caption{The results for the mixing-length theory parameter, $\mlt$ for each star in the PP and PPS models. 100 random samples from the posterior for the population mean, $\mu_\alpha$ and spread, $\mu_\alpha \pm \sigma_\alpha$ are shown in red and grey respectively. The Sun is shown by the solar symbol, $\odot$ in yellow for the PPS model.}
-%     \label{fig:mlt}
-% \end{figure*}
-
-% We present the results for the NP model in Table \ref{tab:np} and for the four pooled models in Tables \ref{tab:pp} to \ref{tab:mps}. We compared our results for each model in this work with the ages, masses and radii from the photometric effective temperature scale results of \citetalias{Serenelli.Johnson.ea2017}. 
-
-% Firstly, we compared the statistical uncertainties as shown in Figure \ref{fig:unc-comp}. Despite the additional free parameters, we obtained median uncertainties of 20 per cent in age, 4.5 per cent in mass and 1.9 per cent in radius for the NP model, which were comparable to \citetalias{Serenelli.Johnshon.ea2017}. However, we improved on the precision of \citetalias{Serenelli.Johnson.ea2017} by factor of $\sim 1.5$ with the inclusion of pooling. We expected this because we saw the a similar shrinkage in uncertainty in the test stars (see the bottom row of Figure \ref{fig:shrinkage}). We saw the highest precision in the MP and MPS models of 9.2 per cent in age, 2.8 per cent in mass and 1.3 per cent in radius when including the Sun. We expected the MP models to be the most precise because it drops all uncertainty in $\mlt$ which is assumed the same for all stars. Partially pooling $\mlt$ in the PP and PPS resulted in uncertainties of 15.6 per cent in age, 3.0 per cent in mass and 1.4 per cent in radius.
-
-% %
-% \begin{figure}
-%     \includegraphics[width=\linewidth]{../modelling/final_models/population+sun_pp_mlt_2_results/DR14_ASPC/zi_yi_results_plot.png}
-%     \caption{With sun}
-%     \label{fig:net}
-% \end{figure}
-% %
-
 \section{Discussion}\label{sec:dis}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%% DISCUSSION %%%%%%%%%%%%%%%%%%
@@ -794,8 +693,6 @@ We found the value for the helium enrichment ratio, $\Delta Y / \Delta Z$ to be 
 
 When we added the Sun to the pooled models, PPS and MPS, obtained $\Delta Y / \Delta Z$ up to 2-$\sigma$ lower than the models without the Sun. In both models, the resulting $\Delta Y / \Delta Z$ of approximately \numrange{0.8}{1.0} was consistent with the initial helium fraction expected from solar models with our choice of \citet{Asplund.Grevesse.ea2009} abundances \citep{Serenelli.Basu2010}. However, such solar models have been shown to not recover helioseismic measurements of helium in the Sun \citep{Basu.Antia2004, Serenelli.Basu.ea2009, Villante.Serenelli.ea2014}. Solar models with the older \citet{Grevesse.Sauval1998} abundances typically yield higher helium fractions more in-line with helioseismology. The $\Delta Y / \Delta Z$ from the PP and MP models are higher than those including the Sun. We could extend our model to include asteroseismic indicators of helium to improve the uncertainties on $Y$ and test whether this difference becomes more significant.
 
-% We found little difference in the helium dispersion, $\sigma_Y$ between all our pooled models. The main difference was the greater $\sigma_Y \approx 0.007$ when fitting the enrichment law to the results of the NP model. This is an example of the hierarchical models pulling individual $Y_\mathrm{init}$ together, enabling a better estimate of the population spread. Since there was little variation in $\sigma_Y$ among hierarchical models, we can conclude that the spread of $Y_\mathrm{init}$ about a linear helium enrichment law in our population of \emph{Kepler} dwarfs and subgiants is $\sigma_Y = 0.005\substack{+0.004\\-0.003}$.
-
 We assumed a linear helium enrichment law dependent only on the initial heavy element abundance, $Z_\mathrm{init}$. However, helium enrichment could vary non-linearly depending on other chemical abundances \citep{West.Heger2013} or the location of the star in the Milky Way \citep{Frebel2010}. Our model has the advantage of being adaptable to different population priors, stellar inputs, and observables. Future work will explore the helium enrichment relation further, with the inclusion of metal-poor stars and a dependence on different chemical abundances.
 
 Our models assumed a prior of $Y_P = \num{0.247(1)}$ for the primordial helium fraction which dominated its posterior. This was a sensible assumption to make when using a linear enrichment law, because measurements of the primordial helium correspond to the abundance at the epoch of BBN according to current cosmological theory \citep{Cyburt.Fields.ea2016}. However, if we used a less informative prior for $Y_P$ we might yield more uncertain results, or even a different value for $Y_P$. In previous work fitting a linear enrichment law, some results for $Y_P$ suggested a value below the BBN value \citep{Casagrande.Flynn.ea2007, SilvaAguirre.Lund.ea2017}. It is more probable that the assumption of a linear enrichment law is inaccurate than a sample of stars could contradict independent $Y_P$ from cosmology. We justify our prior on $Y_P$ as in-line with the assumption of a linear enrichment law, but highlight the need to investigate other ways of describing helium in a population of stars.
@@ -804,13 +701,8 @@ Our models assumed a prior of $Y_P = \num{0.247(1)}$ for the primordial helium f
 
 To a greater degree than chemical composition, the best-fitting $\mlt$ depends on the choice of model physics and stellar modelling code. The mixing-length theory is an approximation of convection which is often calibrated to the Sun and then assumed for all stars in a model. However, studies of 3D hydrodynamical simulations suggest that the degree to which $\mlt$ approximates convection varies across the HR diagram \citep{Magic.Weiss.ea2015} and this is confirmed when modelling stars with asteroseismology \citep{Tayar.Somers.ea2017}.
 
-% Our fit to the NP model results obtained a result for $\mu_\alpha$ close to $2.0$ -- the midpoint of its prior distribution. This was expected because the tests on synthetic stars showed that $\mlt$ was biased in this way due to boundary effects from truncating the distribution at $1.5$ and $2.5$. Again, the NP hyperparameter fit is used for comparison, but is ultimately unreliable.
-
 The PP model (without the Sun) favoured a mean mixing-length parameter of $\mu_\alpha \simeq 1.7$. Whereas, the PPS model yielded a higher value of $\mu_\alpha \simeq 1.9$ by $\sim 2$-$\sigma$. We found this was attributed to the addition of the Sun. The individual solar results for the PPS model yielded a value of $\mlt_\odot = 2.12\pm0.03$ which was considerably higher than the $\mlt$ obtained for the other stars in the sample (see Appendix \ref{sec:sun-res}). This result agrees with the 3D simulations \citep[e.g.][]{Trampedach.Stein.ea2014}, which predict lower $\mlt$ for stars with lower $\teff$ and higher $\log g$. However, the solar value also exceeds the reference solar calibrated values of $\approx 1.92$ for the same stellar evolution code \citep{Paxton.Bildsten.ea2011}. This is caused by the differences in adopted solar mixture, atmospheric boundary conditions and the treatment of convective mixing between this work and typical reference values.
 
-% The solar value also exceeds typical solar calibrated values of $\sim 1.9$ for the same stellar evolution code \citep[see e.g.][]{Stancliffe.Fossati.ea2016}. However, these solar calibrations often consider additional observables such as helioseismic estimates of surface helium abundance and the convective zone depth, and additional physics which drive convective mixing.
-% ------ TODO: ask Tanda for paragraph ------
-% The reason for this is unclear, except that the difference we see between between solar $\mlt$ and the rest of the sample is not unique. Previous work on the LEGACY sample of \emph{Kepler} dwarfs found the best fitting $\mlt$ for their sample approximately 90 per cent of the solar calibrated value for one of their pipelines with similar model physics to this work \citep{SilvaAguirre.Lund.ea2017}.
 Despite the difference in $\mu_\alpha$, the resulting spread in mixing-length for the PPS model $\sigma_\alpha \approx 0.13$ was double that of the PP model to cope with the high solar value. This implies that a large population spread in $\mlt$ could explain the difference we see. In other words, if we assume that the best-fitting $\mlt$ is normally distributed in our population, then the Sun lies within 2-$\sigma$ of the mean, among 95 per cent of all stars in the population. 
 
 There are a few prior studies which look at the spread in $\mlt$ for a population of stars, typically by fitting $\mlt$ as a function of $\metallicity$, $\teff$, and $\log g$ \citep[e.g.][]{Bonaca.Tanner.ea2012,Viani.Basu.ea2018}. For example, results from \citet{Viani.Basu.ea2018} for stellar models including diffusion, predict $\mlt$ in the range \numrange{1.5}{2.3} across our sample. This dispersion would be more compatible with the larger spread obtained by our PPS model. However, in future work we should further investigate how $\mlt$ varies with stellar parameters, as our assumption of a normal distribution may not be accurate.
@@ -834,17 +726,14 @@ Although updated, much of our observable data is comparable to that of \citetali
     \begin{subfigure}[b]{.33\linewidth}
         \centering
         \includegraphics[width=\linewidth]{figures/sigma_mass.png}
-        % \caption{Mass}
     \end{subfigure}%
     \begin{subfigure}[b]{.33\linewidth}
         \centering
         \includegraphics[width=\linewidth]{figures/sigma_rad.png}
-        % \caption{Radius}
     \end{subfigure}%
     \begin{subfigure}[b]{.33\linewidth}
         \centering
         \includegraphics[width=\linewidth]{figures/sigma_age.png}
-        % \caption{Age}
     \end{subfigure}%
     \caption{Kernel density estimates (KDEs) of the distribution of statistical uncertainties in the results from each model compared with those of \citepalias{Serenelli.Johnson.ea2017} for the sample of APOKASC dwarfs and subgiants.}
     \label{fig:unc-comp}
@@ -858,15 +747,12 @@ In the following subsection, we compare the results between our PPS model with t
     \centering
     \begin{subfigure}[b]{.33\linewidth}
         \includegraphics[width=\linewidth]{figures/mass_comp.png}
-        % \caption{Mass}
     \end{subfigure}%
     \begin{subfigure}[b]{.33\linewidth}
         \includegraphics[width=\linewidth]{figures/rad_comp.png}
-        % \caption{Radius}
     \end{subfigure}%
     \begin{subfigure}[b]{.33\linewidth}
         \includegraphics[width=\linewidth]{figures/age_comp.png}
-        % \caption{Age}
     \end{subfigure}%
     \caption{The mean and standard deviation in age, mass and radius results from the PPS model compared with the results (using the photometric temperature scale) from \citetalias{Serenelli.Johnson.ea2017}.}
     \label{fig:comp}
@@ -896,9 +782,8 @@ We identified KIC 9025370 as a possible outlier. Consistent across all our model
 
 KIC 9025370 turned out to be a double-lined spectroscopic binary \citep{Nissen.SilvaAguirre.ea2017}, discovered after \citetalias{Serenelli.Johnson.ea2017} and hence included in the original sample. The higher observed luminosity from \textsc{Isoclassify} and inconsistent spectroscopic $\teff$ compared with our model posteriors were compatible with a spectroscopic binary. We calculated a photometric $\teff$ using the IRFM method \citep{Casagrande.Ramirez.ea2010} with the available 2MASS photometry for the target and obtained $\teff=\SI{5983(120)}{\kelvin}$, more consistent with our modelled effective temperature and inconsistent with its spectroscopic $\teff$. Thus, our inferred $\teff$ was within the dispersion between different observed $\teff$ scales. Running the model without KIC 9025370 did not affect the resulting inferred hyperparameters, demonstrating the robustness of our model. Therefore, we present KIC 9025370 in our results but suggest that further investigation should be carried out.
 
-% \subsection{The potential of pooling}\label{sec:future}
-
 \section{Conclusion}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%% CONCLUSION %%%%%%%%%%%%%%%%%%
@@ -914,9 +799,10 @@ As shown in tests with synthetic stars (Appendix \ref{sec:test-stars}) and appar
 Including all-sky data from \emph{TESS} and in anticipation of \emph{PLATO} \citep{Rauer.Catala.ea2014} we can expect our sample size of asteroseismic dwarfs and subgiants only to increase. There is also scope to extend our grid of models to include red giants, for which there are vast catalogues of stars already studied with \emph{Kepler} \citep{Pinsonneault.Elsworth.ea2018}.
 
 \section*{Acknowledgements}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%% ACKNOWLEDGEMENTS %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%% ACKNOWLEDGEMENTS %%%%%%%%%%%%%%%%
 
 This work is a part of a project that has received funding from the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme (CartographY; grant agreement ID 804752). A.J.L., G.R.D.,  and W.J.C. acknowledge the support of the Science and Technology Facilities Council. D.H. acknowledges support from the Alfred P. Sloan Foundation, the National Aeronautics and Space Administration (80NSSC19K0597), and the National Science Foundation (AST-1717000). M.B.N. acknowledges support from the UK Space Agency. R.A.G. acknowledges the funding from the PLATO CNES grant. We thank Ilya Mandel and Sean Matt for their discussion regarding this work.
 
@@ -936,9 +822,10 @@ This work is a part of a project that has received funding from the European Res
 \appendix
 
 \section{Training the ANN}\label{sec:apx-train}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%% TRAINING THE ANN %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%% TRAINING THE ANN %%%%%%%%%%%%%%%%
 
 In Table \ref{tab:std} we give the scaling parameters used to standardise our training dataset. We determined the median, $\mu_{1/2}$ and standard deviation, $\sigma$ to 3 decimal places for each of the input and output dimensions. We then standardised the data by subtracting $\mu_{1/2}$ and dividing by $\sigma$. In Figure \ref{fig:loss} we show the train and validation MAE as a function of epochs for the final ANN configuration. The train and validation loss were comparable throughout training.
 
@@ -956,9 +843,10 @@ In Table \ref{tab:std} we give the scaling parameters used to standardise our tr
 \end{figure}
 
 \section{The synthetic population}\label{sec:test-stars}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%% THE SYNTHETIC POPULATION %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%% THE SYNTHETIC POPULATION %%%%%%%%%%%%
 
 In this section, we present the results for the NP, PP, and MP models run on a synthetic sample of 100 stars with the following initial conditions. We randomly generated initial $M$ and $\metallicity_\mathrm{init}$ uniformly. We drew initial values for $Y_\mathrm{init}$ from a normal distribution centred on the helium enrichment law from Equation \ref{eq:helium} with $\Delta Y / \Delta Z = 1.8$ and $Y_P = 0.247$, and scaled by $\sigma_Y = 0.008$. We also generated initial values for $\mlt$ from a normal distribution centred on $\mu_\alpha = 2.0$ and scaled by $\sigma_\alpha = 0.08$.
 
@@ -985,15 +873,6 @@ In Figure \ref{fig:shrinkage} we also see a similar reduction in uncertainty for
 
 \subsection{Population parameters}
 
-% In Figure \ref{fig:test-corners-np}, we show the joint posterior distributions for the hyperparameters of the PP model fit to the results of the NP model. We see that this method appears to recover the true values well. However, fitting the model this way does not benefit from the same uncertainty reduction on the stellar parameters as shown in the pooled models. Furthermore, the uncertainties on the individual stellar parameters were found to be unreliable due to boundary effects from the prior. This likely means that the uncertainties on the hyperparameter results for the NP model were underestimated.
-
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=\linewidth]{../modelling/final_test_models/stars_results/test/corner_plot_truths.png}
-%     \caption{Corner plot showing the marginalised and joint posterior distributions between the NP model parameters for the synthetic stars. The true values are shown by the blue lines.}   
-%     \label{fig:test-corners-np} 
-% \end{figure}
-
 In Figure \ref{fig:test-corners-pp}, we see that the PP model also recovers the hyperparameter truths well, with some noise due to random realisation error. Fitting the model this way has the added benefit over the NP model of improving the inference of the individual stellar parameters, as shown in the previous two sections. We also found that when we ran the PP model with 10 and 50 stars, the uncertainties on the hyperparameters also shrank with increasing $N_\mathrm{stars}$.
 
 \begin{figure}
@@ -1012,57 +891,11 @@ Figure \ref{fig:test-corners-mp} shows the hyperparameter results for the MP mod
     \label{fig:test-corners-mp} 
 \end{figure}
 
-% Removed plots and replace with comments.
-% \begin{figure*}
-%     \begin{subfigure}[b]{.33\linewidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{figures/zscore_np.png}
-%         \caption{NP}
-%     \end{subfigure}%
-%     \begin{subfigure}[b]{.33\linewidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{figures/zscore_pp.png}
-%         \caption{PP}
-%     \end{subfigure}%
-%     \begin{subfigure}[b]{.33\linewidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{figures/zscore_mp.png}
-%         \caption{MP}
-%     \end{subfigure}%
-%     \caption{}
-%     \label{fig:zscore}
-% \end{figure*}
-
-% \begin{figure}
-%     \centering
-%     \includegraphics[]{figures/zscore_obs.png}
-%     \caption{}
-%     \label{fig:zscore-obs}
-% \end{figure}
-
-% Fitting the helium enrichment law and spread in mixing-length to the NP model results recovered the true hyperparameters with higher precision than the PP and MP models. However, fitting this way limited the precision of the stellar parameters, wheras the hierarchical models reduced the uncertainties by roughly a factor of $\sqrt{N_\mathrm{stars}}$.
-
-% %
-% \begin{figure*}
-%     \begin{subfigure}[b]{.5\linewidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{../modelling/final_test_models/population_results/test_100/population/corner_plot_truths.png}
-%         \caption{PP model}
-%     \end{subfigure}%
-%     \begin{subfigure}[b]{.5\linewidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{../modelling/final_test_models/population_results/test_max_pool/population/corner_plot_truths.png}
-%         \caption{MP model}
-%     \end{subfigure}
-%     \caption{Corner plots showing the marginalised and joint distributions between the model hyperparameters for the test stars model. The true values are shown in blue.}
-%     \label{fig:test-corners}
-% \end{figure*}
-% %
-
 \section{The Sun as a star}\label{sec:sun-res}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%% THE SUN AS A STAR %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%% THE SUN AS A STAR %%%%%%%%%%%%%%%%
 
 Our model consistently recovers the Sun when modelled in each of the NP, PP, and MP models. In Table \ref{tab:sun-out} we present the results for the Sun as a star from the NP model to show what we obtain without the influence of any other stars in the sample. We show the marginal and joint posterior distributions for the solar parameters from the NP model in the corner plot in Figure \ref{fig:sun-results}.
 
@@ -1075,12 +908,6 @@ We found some differences between $\mlt$ from our solar model and solar calibrat
     \input{tables/sun_outputs.tex}
 \end{table*}
 
-% \begin{figure*}
-%     \centering
-%     \includegraphics[width=\textwidth]{../modelling/final_models/population+sun_results/partial_pool/DR14_ASPC/population/stars/corner_plot_SUN.png}
-%     \caption{A corner plot showing the sampled marginal and joint posterior distributions for the Sun as a part of the PPS model.}
-%     \label{fig:sun-results}
-% \end{figure*}
 \begin{figure*}
     \centering
     \includegraphics[width=\textwidth]{figures/corner_plot_sun.png}
