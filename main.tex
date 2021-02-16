@@ -40,23 +40,21 @@
 %%%%% AUTHORS - PLACE YOUR OWN PACKAGES HERE %%%%%
 
 % Only include extra packages if you really need them. Common packages are:
-\usepackage{graphicx}	% Including figure files
-\usepackage{amsmath}	% Advanced maths commands
-% \usepackage{amssymb}	% Extra maths symbols
+\usepackage{graphicx}	 % Including figure files
+\usepackage{amsmath}	 % Advanced maths commands
+
 \usepackage[
     range-units=single,
     separate-uncertainty=true,
-    multi-part-units=single
-    ]{siunitx}    % Unit formatting and SI unit commands
-\sisetup{group-separator = {,}}
+    multi-part-units=single,
+    group-separator={,}
+    ]{siunitx}           % Consistent formating of SI units and numbers
 
-% \usepackage{bm}
-\usepackage{xcolor}
-\usepackage{booktabs}
-\usepackage{subcaption}
+\usepackage{float}       % Improved floats
+\usepackage{booktabs}    % Better quality tables
+\usepackage{longtable}   % Support for long tables
+\usepackage{subcaption}  % Subfigures and subcaptions
 \captionsetup{compatibility=false}
-\usepackage{float}
-\usepackage{longtable}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -71,6 +69,9 @@
 \newcommand{\teff}{\ensuremath{T_\mathrm{eff}}}
 \newcommand{\mlt}{\ensuremath{{\alpha_\mathrm{MLT}}}}
 
+\renewcommand{\arraystretch}{1.2}  % So row spacing in tables is big enough for math
+
+% Custom SI units (siunix package)
 \DeclareSIUnit\year{yr}
 \DeclareSIUnit\solarmass{\ensuremath{M_\odot}}
 \DeclareSIUnit\solarradius{\ensuremath{R_\odot}}
@@ -80,9 +81,7 @@
 \DeclareSIUnit\magnitude{mag}
 \DeclareSIUnit\aarcsec{as}
 
-\renewcommand{\arraystretch}{1.2}  % So row spacing is big enough
-% \setlength{\tabcolsep}{5pt}  % So that results tables fit
-
+% Citation aliases
 \defcitealias{Serenelli.Johnson.ea2017}{S17}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -91,7 +90,7 @@
 
 % Title of the paper, and the short title which is used in the headers.
 % Keep the title short and informative.
-\title[Hierarchically modelling dwarfs and subgiants]{%
+\title[Hierarchically modelling dwarf and subgiant stars]{%
     Hierarchically modelling \emph{Kepler} dwarfs and subgiants to improve inference of stellar properties with asteroseismology
 }
 
@@ -112,8 +111,6 @@ Daniel Huber,$^{5}$
 Martin B. Nielsen,$^{1,2,6}$
 Sarbani Basu,$^{7}$
 and Rafael A. Garc\'ia$^{8}$
-% \newauthor
-% Will M. Farr,$^{8,9}$
 \\
 % List of institutions
 $^{1}$School of Physics and Astronomy, University of Birmingham, Birmingham, B15 2TT, UK\\
@@ -123,8 +120,6 @@ $^{4}$European Space Agency (ESA), European Space Research and Technology Centre
 $^{5}$Institute for Astronomy, University of Hawai'i, 2680 Woodlawn Drive, Honolulu, HI 96822, USA\\
 $^{6}$Center for Space Science, NYUAD Institute, New York University Abu Dhabi, PO Box 129188, Abu Dhabi, United Arab Emirates\\
 $^{7}$Department of Astronomy, Yale University, 52 Hillhouse Avenue, New Haven, CT 06511, USA\\
-% $^{8}$Center for Computational Astrophysics, Flatiron Institute, 162 5th Avenue, New York, New York 10010, USA\\
-% $^{9}$Department of Physics and Astronomy, Stony Brook University, Stony Brook, New York 11794, USA\\
 $^{8}$AIM, CEA, CNRS, Universit\'e Paris-Saclay, Universit\'e Paris Diderot, Sorbonne Paris Cit\'e, 91191, Gif-sur-Yvette, France\\
 }
 
@@ -804,7 +799,7 @@ Including all-sky data from \emph{TESS} and in anticipation of \emph{PLATO} \cit
 
 %%%%%%%%%%%%%%%% ACKNOWLEDGEMENTS %%%%%%%%%%%%%%%%
 
-This work is a part of a project that has received funding from the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme (CartographY; grant agreement ID 804752). A.J.L., G.R.D.,  and W.J.C. acknowledge the support of the Science and Technology Facilities Council. D.H. acknowledges support from the Alfred P. Sloan Foundation, the National Aeronautics and Space Administration (80NSSC19K0597), and the National Science Foundation (AST-1717000). M.B.N. acknowledges support from the UK Space Agency. R.A.G. acknowledges the funding from the PLATO CNES grant. We thank Ilya Mandel and Sean Matt for their discussion regarding this work.
+This work is a part of a project that has received funding from the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme (CartographY; grant agreement ID 804752). A.J.L., G.R.D., and W.J.C. acknowledge the support of the Science and Technology Facilities Council. D.H. acknowledges support from the Alfred P. Sloan Foundation, the National Aeronautics and Space Administration (80NSSC19K0597), and the National Science Foundation (AST-1717000). M.B.N. acknowledges support from the UK Space Agency. R.A.G. acknowledges the funding from the PLATO CNES grant. We thank Ilya Mandel and Sean Matt for their discussion regarding this work.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
