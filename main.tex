@@ -192,7 +192,7 @@ To provide a means of calculating luminosities, we used \emph{Gaia} Data Release
 
 We determined luminosities, $L$ for the sample using the direct method of \textsc{isoclassify} \citep{Huber.Zinn.ea2017, Berger.Huber.ea2020} with \emph{K\textsubscript{S}}-band photometry, \emph{Gaia} DR2 parallaxes, ASPCAP $\metallicity$ and $\teff$, and asteroseismic $\log g$ as inputs. This involved computing absolute \emph{K\textsubscript{S}}-band magnitudes using the \emph{Gaia} DR2 parallaxes and extinctions determined by the 3D galactic reddening maps of \citet{Green.Schlafly.ea2018}. We determined absolute bolometric magnitudes by interpolating the MIST bolometric correction tables as a function of $\teff$, $\log g$ and $\metallicity$ \citep{Dotter2016, Choi.Dotter.ea2016}. We adopted the uncertainty of \SI{0.02}{\magnitude} assumed by \textsc{isoclassify} for both the extinctions and bolometric corrections, corresponding to typical systematic errors in extinction maps and bolometric fluxes \citep[e.g.][]{Zinn.Pinsonneault.ea2019a,Tayar.Claytor.ea2020}. We obtained luminosities for the sample with a median uncertainty of 3.4 per cent.
 
-The final sample comprised 81 stars for which we had complete data for $\teff$, $\metallicity$, $\dnu$, and $L$ to use as inputs for our stellar modelling method -- see Table \ref{tab:data}. In Figure \ref{fig:data}, we show the Hertzspring-Russell diagram for the sample plot in context with a series of stellar evolutionary tracks at solar metallicity.
+The final sample comprised 81 stars for which we had complete data for $\teff$, $\metallicity$, $\dnu$, and $L$ to use as inputs for our stellar modelling method -- see Table \ref{tab:data}. In Figure \ref{fig:data}, we show the Hertzspr\textbf{\color{red}u}ng-Russell diagram for the sample plot in context with a series of stellar evolutionary tracks at solar metallicity.
 
 \begin{table*}
 	\centering
@@ -529,7 +529,7 @@ We produced a PGM for the model, depicted in Figure \ref{fig:pgm}. The hyperpara
 %
 \begin{figure}
     \includegraphics[width=\linewidth]{figures/partial_pool_pgm.png}
-    \caption{A probabilistic graphical model (PGM) of the partially-pooled (PP) hierarchical model. Nodes outside of the grey rectangle represent the hyperparameters in the model. Nodes inside the grey rectangle represent individual stellar parameters. Dark grey nodes represent observables which each have thier respective observational uncertainties given by the solid black nodes. The direction of the arrows represent the dependencies in the generative model.}
+    \caption{A probabilistic graphical model (PGM) of the partially-pooled (PP) hierarchical model. Nodes outside of the grey rectangle represent the hyperparameters in the model. Nodes inside the grey rectangle represent individual stellar parameters. Dark grey nodes represent observables which each have th\textbf{\color{red}ei}r respective observational uncertainties given by the solid black nodes. The direction of the arrows represent the dependencies in the generative model.}
     \label{fig:pgm}
 \end{figure}
 %
