@@ -164,15 +164,15 @@ Typically, stars are modelled on a star-by-star basis with estimates of stellar 
 
 In this work, we apply the method of Davies et al. (in prep.) to determine stellar properties for a sample of \emph{Kepler} dwarfs and subgiants using a hierarchical Bayesian model (HBM). With an HBM, we introduce population-level distributions for $Y$ and $\mlt$ to encode prior information throughout the sample. We will show that when an HBM is used, we can increase the precision of inferred masses, radii, and ages despite increasing the number of free parameters.
 
-The use of HBMs has been demonstrated in other areas of astrophysics to reduce individual parameter uncertainties by encoding prior information about the distribution of the parameter in a population. For example, HBMs have been used with data from \emph{Gaia}, improving distance measures \citep{Leistedt.Hogg2017, Anderson.Hogg.ea2018} and calibrating the red clump as a standard candle \citep{Hawkins.Leistedt.ea2017, Chan.Bovy2020} using asteroseismology \citep{Hall.Davies.ea2019}. In other instances, HBMs have been used to infer binary-star and exoplanet eccentricities \citep{Hogg.Myers.ea2010}, obliquity of transit systems \citep{Morton.Winn2014}, and stellar inclination with asteroseismology \citep{Campante.Lund.ea2016, Kuszlewicz.Chaplin.ea2019}.
+The use of HBMs has been demonstrated in other areas of astrophysics to reduce individual parameter uncertainties by encoding prior information about the distribution of the parameter in a population. For example, HBMs have been used with data from \emph{Gaia}, improving distance measures \citep{Leistedt.Hogg2017, Anderson.Hogg.ea2018} and calibrating the red clump as a standard candle \citep{Hawkins.Leistedt.ea2017, Chan.Bovy2020} using asteroseismology \citep{Hall.Davies.ea2019}. In other instances, HBMs have been used to infer binary-star and exoplanet eccentricities \citep{Hogg.Myers.ea2010}, obliquity of transit systems \citep{Morton.Winn2014}, stellar inclination with asteroseismology \citep{Campante.Lund.ea2016, Kuszlewicz.Chaplin.ea2019}, \textbf{\color{red} and the age-metallicity relation of the solar neighbourhood \citep{Feuillet.Bovy.ea2016}}.
 
-To describe the distribution of $Y$ in this work, we assume a linear helium enrichment law characterised by freely varied population parameters: the gradient given by $\Delta Y / \Delta Z$, the primordial helium abundance at $Z=0$ ($Y_P$) and an intrinsic spread in helium ($\sigma_Y$). There have been many studies to determine a linear enrichment law, from modelling eclipsing binaries \citep{Ribas.Jordi.ea2000} to spectroscopy of galactic H\textsc{ii} regions \citep{Balser2006}. Values of $\Delta Y / \Delta Z$ have also been determined for samples of main sequence stars \citep{Casagrande.Flynn.ea2007}, open clusters \citep{Brogaard.VandenBerg.ea2012}, and more recently with asteroseismology using individual oscillation frequencies \citep{SilvaAguirre.Lund.ea2017} and the glitch due to the second helium ionisation zone \citep{Verma.Raodeo.ea2019}. In these studies the value of the enrichment ratio was typically inferred to be $1 \lesssim \Delta Y / \Delta Z \lesssim 3$.
+To describe the distribution of $Y$ in this work, we assume a linear helium enrichment law characterised by freely varied population parameters: the gradient given by $\Delta Y / \Delta Z$, the primordial helium abundance at $Z=0$ ($Y_P$) and an intrinsic spread in helium ($\sigma_Y$). There have been many studies to determine a linear enrichment law, from modelling eclipsing binaries \citep{Ribas.Jordi.ea2000} to spectroscopy of galactic H\textsc{ii} regions \citep{Balser2006}. Values of $\Delta Y / \Delta Z$ have also been determined for samples of main sequence (MS) stars \citep{Casagrande.Flynn.ea2007}, open clusters \citep{Brogaard.VandenBerg.ea2012}, and more recently with asteroseismology using individual oscillation frequencies \citep{SilvaAguirre.Lund.ea2017} and the glitch due to the second helium ionisation zone \citep{Verma.Raodeo.ea2019}. In these studies the value of the enrichment ratio was typically inferred to be $1 \lesssim \Delta Y / \Delta Z \lesssim 3$.
 
-The widely used mixing-length theory of convection, parametrised by $\mlt$, has been tested throughout the Hertzsprung-Russell diagram with 3D hydrodynamical simulations \citep{Trampedach.Stein.ea2014, Magic.Weiss.ea2015} and asteroseismology \citep{Tayar.Somers.ea2017, Viani.Basu.ea2018, Li.Bedding.ea2018} with values in the range $0.8 \lesssim \mlt/\alpha_{\mathrm{MLT}, \odot} \lesssim 1.2$ where $\alpha_{\mathrm{MLT}, \odot}$ is the value calibrated to the Sun. However, in many grids of stellar models, a constant value calibrated to reproduce the Sun is assumed. This can lead to systematic uncertainties in stellar ages due to the effects of variable mixing depending on the mixing length. In this work, we experiment with two prior assumptions for $\mlt$, one assuming the best-fitting $\mlt$ is normally distributed in our sample, and the other assuming it is constant throughout.
+The widely used mixing-length theory of convection, parametrised by $\mlt$, has been tested throughout the Hertzsprung-Russell \textbf{\color{red} (HR)} diagram with 3D hydrodynamical simulations \citep{Trampedach.Stein.ea2014, Magic.Weiss.ea2015} and asteroseismology \citep{Tayar.Somers.ea2017, Viani.Basu.ea2018, Li.Bedding.ea2018} with values in the range $0.8 \lesssim \mlt/\alpha_{\mathrm{MLT}, \odot} \lesssim 1.2$ where $\alpha_{\mathrm{MLT}, \odot}$ is the value calibrated to the Sun. However, in many grids of stellar models, a constant value calibrated to reproduce the Sun is assumed. This can lead to systematic uncertainties in stellar ages due to the effects of variable mixing depending on the mixing length. In this work, we experiment with two prior assumptions for $\mlt$, one assuming the best-fitting $\mlt$ is normally distributed in our sample, and the other assuming it is constant throughout.
 
 Our HBM requires a way to map from the stellar initial (or bulk) properties to predict observables. We can achieve this with a large grid of stellar evolutionary models. However, a discrete grid can produce inaccurate posterior distributions, limited to the grid resolution. Increasing the resolution is computationally demanding, especially when scaling to higher input dimensions. One solution is to interpolate the stellar models, as is common in the isochrone-fitting method \citep[see e.g.][]{Berger.Huber.ea2020}. However, interpolation can become computationally expensive at high input dimensions and grid size, and evaluating the likelihood using modern Bayesian sampling techniques is slow. Therefore, we use machine learning to map stellar model inputs to observables to provide a fast way to sample the HBM. In this work, we train an artificial neural network (ANN) on a large grid of stellar models. There have been similar applications of ANNs in asteroseismology \citep{Verma.Hanasoge.ea2016, Bellinger.Angelou.ea2016, Hon.Stello.ea2017, Hon.Stello.ea2018a, Hendriks.Aerts2019} but not yet in the context of an HBM. Using the machine learning speed-up, we demonstrate a scalable method for obtaining fundamental stellar parameters.
 
-In Section \ref{sec:data}, we describe the data for the sample of 81 \emph{Kepler} dwarfs and subgiants studied in this work. We then present the methods in Section \ref{sec:meth} for which we produced a large grid of stellar evolutionary models to use as training data for an ANN (see Sections \ref{sec:grid} and \ref{sec:ann} respectively). We use the ANN as an emulator in a series of statistical models described in Section \ref{sec:hbm} to model the sample and present our results in Section \ref{sec:res}. Finally, in Section \ref{sec:dis} we discuss the results from each model and compare them to results for the sample of stars in the literature.
+In Section \ref{sec:data}, we describe the data for the sample of 81 \emph{Kepler} dwarfs and subgiants studied in this work. We then present the methods in Section \ref{sec:meth} for which we produced a large grid of stellar evolutionary models to use as training data for an ANN. We use the ANN as an emulator in a series of statistical models described in Section \ref{sec:hbm} to model the sample and present our results in Section \ref{sec:res}. Finally, in Section \ref{sec:dis} we discuss the results from each model and compare them to results for the sample of stars in the literature.
 
 \section{Data}\label{sec:data}
 
@@ -180,7 +180,7 @@ In Section \ref{sec:data}, we describe the data for the sample of 81 \emph{Keple
 
 %%%%%%%%%%%%%%%%%%%%%% DATA %%%%%%%%%%%%%%%%%%%%%%
 
-For this study, we selected the sample of 415 stars from the first APOKASC catalogue of dwarfs and subgiants \citep[][hereafter \citetalias{Serenelli.Johnson.ea2017}]{Serenelli.Johnson.ea2017}. This sample provides an extensive set of dwarfs and subgiant stars with asteroseismic detections observed by the \emph{Kepler} mission. \citetalias{Serenelli.Johnson.ea2017} used grid-based modelling to determine the ages ($\tau$), masses ($M$), radii ($R$), and surface gravity ($\log g$) of stars in the sample, using global asteroseismic parameters, effective temperature ($\teff$), and metallicity ($\metallicity$) as inputs. 
+For this study, we selected the sample of 415 stars from the first APOKASC catalogue of dwarfs and subgiants \citep[][hereafter \citetalias{Serenelli.Johnson.ea2017}]{Serenelli.Johnson.ea2017}. This sample provides an extensive set of dwarfs and subgiant stars with asteroseismic detections observed by the \emph{Kepler} mission. \citetalias{Serenelli.Johnson.ea2017} used grid-based modelling to determine the ages ($\tau$), masses ($M$), radii ($R$), and surface gravity ($\log g$) of stars in the sample, using global asteroseismic parameters, effective temperature ($\teff$), and metallicity ($\metallicity$) as inputs.
 
 Using five independent pipelines, \citetalias{Serenelli.Johnson.ea2017} determined values for global asteroseismic parameters -- the large frequency separation $\dnu$ and the frequency at maximum power, $\numax$ with median uncertainties of 1.7 per cent and 4 per cent respectively. We chose to adopt the $\dnu$ determined in their work as inputs for our method. They also used $\metallicity$ published in Data Release 13 \citep[DR13;][]{Albareti.AllendePrieto.ea2017} of the APOGEE stellar abundances pipeline \citep[ASPCAP;][]{GarciaPerez.AllendePrieto.ea2016} with uncertainties of \SI{0.1}{\dex}. For their preferred set of results, they adopted $\teff$ from the Sloan Digital Sky Survey (SDSS) \emph{griz}-band photometry \citep{Pinsonneault.An.ea2012} with a median uncertainty of \SI{70}{\kelvin}.
 
@@ -188,11 +188,11 @@ We removed more evolved stars from the APOKASC sample by cutting those with $\lo
 
 Following cuts to the sample, we adopted updated ASPCAP spectroscopic metallicities, \metallicity, from Data Release 14 \citep[DR14;][]{Blanton.Bershady.ea2017} which had a median uncertainty of \SI{0.07}{\dex}. We also chose to adopt $\teff$ from the same catalogue to be internally consistent. We note that our chosen effective temperature scale is offset from the photometric temperature scale of \citetalias{Serenelli.Johnson.ea2017} by approximately $- \SI{170}{\kelvin}$ with a dispersion of $\sim \SI{120}{\kelvin}$. The median uncertainty in our adopted ASPCAP $\teff$ was \SI{125}{\kelvin} which is compatible with the dispersion observed.
 
-To provide a means of calculating luminosities, we used \emph{Gaia} Data Release 2 (DR2) parallaxes \citep{GaiaCollaboration.Prusti.ea2016, GaiaCollaboration.Brown.ea2018}. We cross-matched the remaining sample with the DR2 catalogue, taking the nearest neighbours within a 4 arcsec radius. Although DR2 parallaxes have improved upon the DR1 values at the time of \citetalias{Serenelli.Johnson.ea2017}, there was still evidence for a zero-point offset \citep{Lindegren.Hernandez.ea2018}. We adopted a global offset of \SI{0.05}{\milli\aarcsec}, in the sense that DR2 parallaxes were underestimated, representative of values obtained in the literature \citep[see e.g.][]{Riess.Casertano.ea2018, Zinn.Pinsonneault.ea2019, Hall.Davies.ea2019, Chan.Bovy2020}. We then cross-matched our sample with the Two-Micron All Sky Survey \citep[2MASS;][]{Skrutskie.Cutri.ea2006} to obtain \emph{K\textsubscript{S}}-band (\SI{2.16}{\micro\metre}) photometry.
+To provide a means of calculating luminosities, we used \emph{Gaia} Data Release 2 (DR2) parallaxes \citep{GaiaCollaboration.Prusti.ea2016, GaiaCollaboration.Brown.ea2018}. We cross-matched the remaining sample with the DR2 catalogue, taking the nearest neighbours within a 4 arcsec radius. Although DR2 parallaxes have improved upon the DR1 values at the time of \citetalias{Serenelli.Johnson.ea2017}, there was still evidence for a zero-point offset \citep{Lindegren.Hernandez.ea2018}. We adopted a global offset of \SI{0.05}{\milli\aarcsec}, in the sense that DR2 parallaxes were underestimated, representative of values obtained in the literature \textbf{\color{red} using \textit{Kepler} field stars} \citep[see e.g.][]{Zinn.Pinsonneault.ea2019, Hall.Davies.ea2019} \textbf{\color{red} and through other methods} \citep[see e.g.][]{Riess.Casertano.ea2018, Chan.Bovy2020}. We then cross-matched our sample with the Two-Micron All Sky Survey \citep[2MASS;][]{Skrutskie.Cutri.ea2006} to obtain \emph{K\textsubscript{S}}-band (\SI{2.16}{\micro\metre}) photometry.
 
 We determined luminosities, $L$ for the sample using the direct method of \textsc{isoclassify} \citep{Huber.Zinn.ea2017, Berger.Huber.ea2020} with \emph{K\textsubscript{S}}-band photometry, \emph{Gaia} DR2 parallaxes, ASPCAP $\metallicity$ and $\teff$, and asteroseismic $\log g$ as inputs. This involved computing absolute \emph{K\textsubscript{S}}-band magnitudes using the \emph{Gaia} DR2 parallaxes and extinctions determined by the 3D galactic reddening maps of \citet{Green.Schlafly.ea2018}. We determined absolute bolometric magnitudes by interpolating the MIST bolometric correction tables as a function of $\teff$, $\log g$ and $\metallicity$ \citep{Dotter2016, Choi.Dotter.ea2016}. We adopted the uncertainty of \SI{0.02}{\magnitude} assumed by \textsc{isoclassify} for both the extinctions and bolometric corrections, corresponding to typical systematic errors in extinction maps and bolometric fluxes \citep[e.g.][]{Zinn.Pinsonneault.ea2019a,Tayar.Claytor.ea2020}. We obtained luminosities for the sample with a median uncertainty of 3.4 per cent.
 
-The final sample comprised 81 stars for which we had complete data for $\teff$, $\metallicity$, $\dnu$, and $L$ to use as inputs for our stellar modelling method -- see Table \ref{tab:data}. In Figure \ref{fig:data}, we show the Hertzspr\textbf{\color{red}u}ng-Russell diagram for the sample plot in context with a series of stellar evolutionary tracks at solar metallicity.
+The final sample comprised 81 stars for which we had complete data for $\teff$, $\metallicity$, $\dnu$, and $L$ to use as inputs for our stellar modelling method -- see Table \ref{tab:data}. In Figure \ref{fig:data}, we show the \textbf{\color{red} HR} diagram for the sample plot in context with a series of stellar evolutionary tracks at solar metallicity.
 
 \begin{table*}
 	\centering
@@ -214,7 +214,7 @@ The final sample comprised 81 stars for which we had complete data for $\teff$, 
 
 %%%%%%%%%%%%%%%%%%%% METHODS %%%%%%%%%%%%%%%%%%%%%
 
-Firstly, we used a stellar evolutionary code to compute a grid of models to predict observable quantities (see Section \ref{sec:grid}). In Section \ref{sec:ann}, we describe a method to replace the grid of stellar models with a smooth function approximation. Here, we trained an ANN on the grid of stellar models to map input parameters to output observables. We then constructed three Bayesian models in Section \ref{sec:hbm} which each sampled the trained ANN to estimate stellar fundamental parameters as described in Section \ref{sec:sampling}. Evaluation of the ANN gradient is required during training. Consequently, estimating the gradient of the model likelihood is fast and simple when the observables are generated by an ANN. Hence, we open up the possibility of using a Hamiltonian Monte Carlo (HMC) algorithm -- for example, using the No-U-Turn Sampler \citep[NUTS;][]{Hoffman.Gelman2014} -- which requires the gradient to sample the model posterior. Once we had tested the accuracy of the model on a sample of synthetic stars, we evaluated each model on the subset of the APOKASC catalogue selected in Section \ref{sec:data}.
+Firstly, we used a stellar evolutionary code to compute a grid of models to predict observable quantities (see Section \ref{sec:grid}). \textbf{\color{red}Subsequently, we trained an ANN on the grid of stellar models to map input parameters to output observables (see Appendix \ref{sec:ann} for further details)}. We then constructed three Bayesian models in Section \ref{sec:hbm} which each sampled the trained ANN to estimate stellar fundamental parameters as described in Section \ref{sec:sampling}. Evaluation of the ANN gradient is required during training. Consequently, estimating the gradient of the model likelihood is fast and simple when the observables are generated by an ANN. Hence, we open up the possibility of using a Hamiltonian Monte Carlo (HMC) algorithm -- for example, using the No-U-Turn Sampler \citep[NUTS;][]{Hoffman.Gelman2014} -- which requires the gradient to sample the model posterior. Once we had tested the accuracy of the model on a sample of synthetic stars, we evaluated each model on the subset of the APOKASC catalogue selected in Section \ref{sec:data}.
 
 \subsection{Grid of stellar models}\label{sec:grid}
 
@@ -222,7 +222,7 @@ Firstly, we used a stellar evolutionary code to compute a grid of models to pred
 
 %%%%%%%%%% GRID OF STELLAR MODELS -- TL %%%%%%%%%%
 
-We built a stellar model grid to use in training the ANN. The grid includes four independent model inputs: stellar mass ($M$), initial helium fraction ($Y_{\rm init}$), initial metallicity ($\mathrm{[M/H]}_\mathrm{init}$), and the mixing-length parameter ($\mlt$). Ranges and grid steps of the four model inputs are summarised in Table \ref{tab:grid}. We increased the resolution at higher $\metallicity$ to give a more consistent resolution in $Z_\mathrm{init}$ which we used as an ANN input in Section \ref{sec:ann}. We computed each stellar evolutionary track from the Hayashi line to the base of red-giant branch defined here by $\log g$ = 3.6 dex. 
+We built a stellar model grid to use in training the ANN. The grid includes four independent model inputs: stellar mass ($M$), initial helium fraction ($Y_{\rm init}$), initial metallicity ($\mathrm{[M/H]}_\mathrm{init}$), and the mixing-length parameter ($\mlt$). Ranges and grid steps of the four model inputs are summarised in Table \ref{tab:grid}. We increased the resolution at higher $\metallicity$ to give a more consistent resolution in $Z_\mathrm{init}$ which we used as an ANN input in Appendix \ref{sec:ann}. We computed each stellar evolutionary track from the Hayashi line to the base of red-giant branch defined here by $\log g$ = 3.6 dex. 
 We also computed an additional set of evolutionary tracks, with input values chosen randomly within the range of the regular grid, to use when testing the accuracy of the ANN.
 
 \begin{table}
@@ -276,125 +276,6 @@ Theoretical stellar oscillations were calculated with the \textsc{GYRE} code (ve
 
 We chose to ignore the well known, yet poorly characterised impact of modelled oscillation mode inaccuracies in the near-surface region of the star \citep{Kjeldsen.Bedding.ea2008, Ball.Gizon2014, Sonoi.Samadi.ea2015}. This typically presents only a small effect compared to observational uncertainties when considering the average large frequency spacing, $\dnu$. Additionally, there may be further inaccuracies in the modelled $\dnu$ because of variations in p mode frequencies with stellar activity \citep{Chaplin.Elsworth.ea2007, Garcia.Mathur.ea2010, Kiefer.Schad.ea2017}. Therefore, a thorough treatment of systematic uncertainties in $\dnu$ is instead left to future work (Carboneau et al. in preparation). % This may need more         
 
-\subsection{Artificial neural network}\label{sec:ann}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%% ARTIFICIAL NEURAL NETWORK %%%%%%%%%%%%
-
-Once we constructed our grid of models, we needed a way in which we could continuously sample the grid for use in our statistical model. We opted to train an ANN. The ANN is advantageous over interpolation because it scales well with dimensionality, training and evaluation is fast, and gradient evaluation is easy due to its roots in linear algebra \citep{Haykin2007}. We trained an ANN on the data generated by the grid of stellar models to map fundamentals to observables. Firstly, we split the grid into a \emph{train} and \emph{validation} dataset for tuning the ANN, as described in Section \ref{sec:train}. We then tested a multitude of ANN configurations and training data inputs, repeatedly evaluating them with the validation dataset in Section \ref{sec:opt}. In Section \ref{sec:test}, we reserved a set of randomly generated, off-grid stellar models as our final \emph{test} dataset to evaluate the approximation ability of the best-performing ANN independently from our train and validation data. Here, we briefly describe the theory and motivation behind the ANN.
-
-An ANN is a network of artificial \emph{neurons} which each transform some input vector, $\boldsymbol{x}$ based on trainable weights, $\boldsymbol{w}$ and a bias, $b$. The weights are represented by the connections between neurons and the bias is a unique scalar associated with each neuron. A multi-layered ANN is where neurons are arranged into a series of layers such that any neuron in layer $j-1$ is connected to at least one of the neurons in layer $j$. 
-
-In this work, we considered a fully-connected ANN, where each neuron in layer $j-1$ is connected to every neuron in layer $j$. The output of the $k$-th neuron in layer $j$ is, 
-%
-\begin{equation}
-    x_{j, k}=f_j(\boldsymbol{w}_{j, k} \cdot \boldsymbol{x}_{j-1} + b_{j, k}),
-\end{equation}
-%
-where $f_j$ is the \emph{activation} function for the $j$-th layer, $\boldsymbol{w}_{j, k}$ are the weights connecting all the neurons in layer $j-1$ to the current neuron, and $b_{j, k}$ is the bias. This generalises such that the output of the $j$-th layer is,
-%
-\begin{equation}
-    \boldsymbol{x}_{j}=f_j(\boldsymbol{W}_{j} \cdot \boldsymbol{x}_{j-1} + \boldsymbol{b}_{j}),
-\end{equation}
-%
-where $\boldsymbol{W}_j$ is the matrix of weights leading to all neurons in the $j$-th layer. For a regression ANN, we typically have a linear activation function applied to the final output layer. Layers of neurons between the input and output layers are called \emph{hidden} layers. Therefore, the output of a network of $H$ hidden layers with initial input $\boldsymbol{\mathbb{X}}$ is,
-%
-\begin{equation}
-    \widetilde{\boldsymbol{\mathbb{Y}}} = \boldsymbol{W}_{H} \cdot f_{H-1}(\dots f_1(\boldsymbol{W}_1 \cdot f_0(\boldsymbol{W}_{0} \cdot \boldsymbol{\mathbb{X}} + \boldsymbol{b}_{0}) + \boldsymbol{b}_1) ) + \boldsymbol{b}_{H}.
-\end{equation}
-%
-We also restricted our configuration to an ANN with the same number of neurons, $N$ in each hidden layer. Hereafter, we refer to our choice of neurons per layer, $N$ and hidden layers, $H$ as the \emph{architecture} (see Figure \ref{fig:net}).
-
-\begin{figure}
-    \includegraphics[width=\linewidth]{figures/network_10.png}
-    \caption{An artificial neural network comprising $H$ hidden layers with $N$ neurons per layer. Arrows connecting the nodes represent tunable weights.}
-    \label{fig:net}
-\end{figure}
-
-To fit the ANN, we used a set of training data, $\boldsymbol{\mathbb{D}}_\mathrm{train} = \{\boldsymbol{\mathbb{X}}_i, \boldsymbol{\mathbb{Y}}_i\}_{i=1}^{N_\mathrm{train}}$ comprising $N_\mathrm{train}$ input-output pairs. We split the training data into pseudo-random batches, $\boldsymbol{\mathbb{D}}_\mathrm{batch}$ because this has been shown to improve ANN stability and computational efficiency \citep{Masters.Luschi2018}. The set of predictions made for each batch is evaluated using a \emph{loss} function which primarily comprises an error function, $E(\boldsymbol{\mathbb{D}}_\mathrm{batch})$ to quantify the difference between the training data outputs ($\boldsymbol{\mathbb{Y}}$) and predictions ($\widetilde{\boldsymbol{\mathbb{Y}}}$). We also considered an additional term to the loss called \emph{regularisation} which helps reduce over-fitting \citep{Goodfellow.Bengio.ea2016}. During fitting, the weights are updated after each batch using an algorithm called the \emph{optimizer}, back-propagating the error with the goal of minimising the loss such that $\widetilde{\boldsymbol{\mathbb{Y}}} \approx \boldsymbol{\mathbb{Y}}$ \citep[see e.g.][]{Rumelhart.Hinton.ea1986}.
-
-We trained the ANN using \textsc{TensorFlow} \citep{Abadi.Barham.ea2016}. We varied the architecture, number of batches, choice of loss function, optimizer, and regularisation during the optimisation phase. For each set of ANN parameters, we initialised the ANN with a random set of weights and biases and minimized the loss over a given number of \emph{epochs}. An epoch is defined as one iteration through the entire training dataset, $\boldsymbol{\mathbb{D}}_\mathrm{train}$. We tracked the loss for each ANN using an independent validation dataset to determine the most effective choice of ANN parameters (see Section \ref{sec:opt}).
-
-\subsubsection{Train, validation, and test data}\label{sec:train}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%% TRAIN-TEST SPLIT %%%%%%%%%%%%%%%%
-
-We built the train and validation datasets from the outputs of the grid of stellar models in Section \ref{sec:grid}. This included the input parameters: $M$, $\mlt$, $Y_\mathrm{init}$, and the initial heavy-elements fraction, $Z_\mathrm{init}$. We also included the $\teff$, $\log g$, $\dnu$, stellar age ($\tau$), radius ($R$), surface metallicity ($\metallicity_\mathrm{surf}$), and other chemical composition information generated by the models. We determined the fractional main sequence (MS) lifetime, $f_{\mathrm{MS}} = \tau / \tau_{\mathrm{MS}}$, of each evolutionary track by taking $\tau_{\mathrm{MS}}$ as the age when the central hydrogen fraction, $X_c < 0.01$. We then cut data where $f_{\mathrm{MS}} < 0.01$ to remove points on the grid prior to the MS. Once we had refined the data from the grid of models, we randomly sampled \num{7.736e6} points to use as the training dataset, with the remaining $\sim \num{2e6}$ points given to the validation dataset. We varied our choice of ANN input and output parameters among those available in the dataset during tuning (see Section \ref{sec:opt}).
-
-Additionally, we produced a test dataset of $\sim \num{2e6}$ stellar models evolved using \textsc{MESA}. Values for the initial $M$, $\metallicity$, $Y$, and $\mlt$ were chosen randomly within the range of grid parameters described in Table \ref{tab:grid} such that they spanned the breadth of the grid in an unbiased manner. We prepared this dataset in the same way as the training set, but also constrained it to $\tau < \SI{15}{\giga\year}$ because we consider ages above $\sim \SI{15}{\giga\year}$ unphysical and such points are sparse in the training data. The test dataset was set aside and evaluated on the final ANN.
-
-\subsubsection{Tuning}\label{sec:opt}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%% OPTIMIZATION %%%%%%%%%%%%%%%%%%
-
-We trained an ANN to reproduce stellar observables according to our choice of physics with greater accuracy than typical observational precisions. We experimented with a variety of ANN parameter choices, such as the architecture, activation function, optimization algorithm, and loss function. We tuned the ANN parameters by varying them in both a grid-based and heuristic approach, each time evaluating the accuracy using the validation dataset.
-
-During initial tuning, we found that having stellar age as an input was unstable, because it varied heavily with the other input parameters. We mitigated this by introducing an input to describe the fraction of time a star had spent in a given evolutionary phase, $f_\mathrm{evol}$. 
-%
-\begin{equation}
-    f_\mathrm{evol} = \begin{cases}
-        f_\mathrm{MS},\quad &f_\mathrm{MS} \leq 1\\
-        1 + \frac{\tau\,-\,\tau_\mathrm{MS}}{\tau_\mathrm{end}\,-\,\tau_\mathrm{MS}},\quad &f_\mathrm{MS} > 1
-    \end{cases}
-\end{equation}
-%
-where $\tau_\mathrm{end}$ is the age of the star at the end of the track,
-%
-\begin{equation}
-    f_\mathrm{MS} = \frac{\tau}{\tau_\mathrm{MS}},
-\end{equation}
-%
-and $\tau_\mathrm{MS}$ is the MS lifetime. A star with $f_\mathrm{evol} \in (0, 1]$ is in its MS phase, burning hydrogen in its core, and $f_\mathrm{evol} \in (1, 2]$ has left the MS. Consequently, $f_\mathrm{evol}$ gives the ANN information about the internal state of the star which affects the output observables. Otherwise, $f_\mathrm{evol}$ has little physical meaning, although it could be interpreted as a measure of the evolutionary phase of the star.
-
-We also observed that the ANN trained poorly in areas with a high rate of change in observables, likely because of poor grid coverage in those areas. To bias training to such areas, we calculated the gradient in $\teff$ and $\log g$ between each point for each stellar evolutionary track and used them as optional weights to the loss during tuning. These weights multiplied the difference between the ANN prediction and the training data in our chosen loss function.
-
-After preliminary tuning, we chose the ANN input and output parameters to be $\boldsymbol{\mathbb{X}} = \{f_\mathrm{evol}, M, \mlt, Y_\mathrm{init}, Z_\mathrm{init}\}$ and $\boldsymbol{\mathbb{Y}} = \{\log(\tau), \teff, R, \dnu, \metallicity_\mathrm{surf}\}$ respectively. A generalised form of our neural network is depicted in Figure \ref{fig:net}. The inputs corresponded to initial conditions in the stellar modelling code and the outputs corresponded to surface conditions throughout the lifetime of the star, with the exception of age which is mapped from $f_\mathrm{evol}$.
-
-We standardised the training dataset by subtracting the median, $\mu_{1/2}$ and dividing by the standard deviation, $\sigma$ for each input and output parameter. We found that the ANN performed better when the training data was scaled in this way as opposed to no scaling at all. In Table \ref{tab:std} of Appendix \ref{sec:apx-train} we show the locations and scales of the standardisation for our chosen input and output parameters.
-
-We found that the optimal choice of architecture ($N$ and $H$) varied depending on our choice of other ANN parameters. Therefore, each time we explored a new parameter, we trained an ANN with a grid of $(N,H)$ ranging from $(32, 2)$ to $(512, 10)$.
-
-We evaluated the performance of three activation functions: the hyperbolic-tangent, the rectified linear unit \citep[ReLU;][]{Hahnloser.Sarpeshkar.ea2000, Glorot.Bordes.ea2011} and the exponential linear unit \citep[ELU;][]{Clevert.Unterthiner.ea2015}. Although the ReLU activation function out-performed the other two in speed and accuracy, the resulting ANN output was not smooth. The discontinuity in the ReLU function, $f(x) = \max(0, x)$ in turn caused the output to be discontinuous. This made the ANN difficult to sample for our choice of statistical model (see Section \ref{sec:hbm}). Out of the remaining activation functions, ELU performed the best, providing a smooth output which was well-suited to our probabilistic sampling methods.
-
-We compared the performance of two optimisers: Adam \citep{Kingma.Ba2014} and stochastic gradient descent \citep[SGD; see e.g.][]{Ruder2016} with and without momentum \citep{Qian1999}. Both optimizers required a choice of \emph{learning rate} which determined the rate at which the weights were adjusted during training. We found that Adam performed well but the validation loss was noisy as a function of epochs as it struggled to converge. The SGD optimizer was less noisy than Adam, but it was difficult to tune the learning rate. However, SGD with momentum allowed for more adaptive weight updates and out-performed the other configurations.
-
-There are several ways to reduce over-fitting, from minimising the complexity of the architecture, to increasing the size and coverage of the training dataset. One alternative is to introduce weight regularisation. So-called L2 regularisation adds a term, $\sim \lambda_k \sum_i w_{i, k}^2$ to the loss function for a given hidden layer, $k$ which acts to keep the weights small. We varied the magnitude of $\lambda_k$ and found that if it was too large it would dominate the loss function, but if it was too small then performance on the validation dataset was poorer.
-
-We compared the choice of two error functions: mean squared error (MSE) and mean absolute error (MAE). The former is widely used among ANNs because it is more sensitive to large errors. However, we tracked both metrics regardless of which was added to the loss function and found that MAE converged faster. Although MAE is less effective at large errors, we found that these were typically at the edges of the grid and the accuracy was good enough everywhere else.
-
-After extensive tuning, we opted for an ANN with $N=128$ neurons in each of $H=6$ hidden layers. Each of the hidden layers used an ELU activation function and L2 weight regularisation with $\lambda = \num{1e-6}$. We trained the ANN for \num{50000} epochs with a \num{500} training data batches each containing \num{15472} input-output pairs. To fit the ANN, we used an SGD optimiser with an initial learning rate of \num{1e-4} and momentum of \num{0.999} with an MAE loss function. Training took $\sim \SI{48}{\hour}$ on an NVidia Tesla V100 graphics processing unit (GPU).
-
-\subsubsection{Testing}\label{sec:test}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%% Validation %%%%%%%%%%%%%%%%%%%
-
-The test dataset contained $\sim \num{2e6}$ stellar models evolved in the same way as the training dataset, but with initial conditions chosen randomly across the range of the grid. We made predictions for the test dataset, deriving luminosity from the output radius and effective temperature, using the final trained ANN as described in Section \ref{sec:opt}. We then evaluated the accuracy of the ANN by taking the difference between the test truth and ANN prediction, $x_\mathrm{true} - x_\mathrm{pred}$. 
-
-\begin{table*}
-	\centering
-	\caption{The median error, $\mu_{1/2}$ and median absolute deviation of the error, $\sigma_\mathrm{MAD} = 1.4826\cdot\mathrm{median}(|E(\mathbb{Y}) - \mu_{1/2}|)$ for a given ANN output parameter, $\mathbb{Y}$ from the test dataset. The error, $E(\mathbb{Y})$, is given in the table header, where $\delta \mathbb{Y} = \widetilde{\mathbb{Y}} - \mathbb{Y}$.}
-	\label{tab:test}
-    \input{tables/test_random.tex}    
-\end{table*}
-
-We found good agreement between the test dataset and ANN predictions, within typical observational uncertainties. We noted that the largest errors lay at the boundaries of the training data and in areas sparsely populated by the grid. This is apparent in Figure \ref{fig:test} where we plot the test error against each parameter. For example, the spread in error increases for $\metallicity_\mathrm{surf} < -0.5$ where training data is sparse at the edge of the grid. However, the accuracy is very good within the observed range covered by our sample of 81 dwarfs and subgiants. Hence, we chose the median absolute deviation (MAD) as an estimator of the spread in error because it is less sensitive to large errors at the grid boundary than the standard deviation.
-
-To represent the accuracy of the ANN, we present the median, $\mu_{1/2}$ and MAD estimator, $\sigma_\mathrm{MAD} = 1.4826\cdot\mathrm{median}(|E(x) - \mu_{1/2}|)$ of the error ($E(x)$) in Table \ref{tab:test}. The median is close to zero for all parameters, showing little systematic bias in the ANN. The MAD is also lower than observational uncertainties quoted in Section \ref{sec:data}. The spread in error for $\dnu$ of $\SI{0.06}{\mu\Hz}$ is comparable to a small number of observations with the best signal-to-noise. However, the error in $\dnu$ predictions is also comparable to other systematic uncertainties in $\dnu$ discussed in Section \ref{subsec:seismo_model}. Therefore, a robust model which takes account of systematic uncertainties pertaining to $\dnu$, including those from the ANN, will be explored in future work (Carboneau et al. in preparation).
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{figures/test_random.png}
-    \caption{\emph{Left}: the rolling error between a given parameter in the test dataset ($\mathbb{Y}$) and the ANN prediction for that parameter ($\widetilde{\mathbb{Y}}$) where $\delta \mathbb{Y} = \widetilde{\mathbb{Y}} - \mathbb{Y}$. \emph{Right}: a kernel density estimate (KDE) of the error and a normal distribution centred on the median, $\mu_{1/2}$ with an estimator for the standard deviation from the median absolute deviation, $\sigma_\mathrm{MAD}$.}
-    \label{fig:test}
-\end{figure}
-
 \subsection{Statistical models}\label{sec:hbm}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -407,7 +288,7 @@ Our first model was equivalent to modelling each star individually and featured 
 
 \subsubsection{No-pooled model}\label{sec:np}
 
-Firstly, we constructed a model comprising independent parameters $\boldsymbol{\theta}_i = \{f_{\mathrm{evol}, i}, M_i, \alpha_{\mathrm{MLT},i}, Y_i, Z_i\}$ for a given star, $i$. Using Bayes' theorem, the \emph{posterior} probability density function (PDF) of the model parameters given a set of observed data, $\boldsymbol{d}_i$ is,
+Firstly, we constructed a model comprising independent parameters corresponding to the ANN inputs $\boldsymbol{\theta}_i = \{f_{\mathrm{evol}, i}, M_i, \alpha_{\mathrm{MLT},i}, Y_i, Z_i\}$ for a given star, $i$. \textbf{\color{red} The parameter $f_{\mathrm{evol}, i}$ describes the evolutionary stage of the $i$-th star (see Equation \ref{eq:fevol} in the Appendix).} Using Bayes' theorem, the \emph{posterior} probability density function (PDF) of the model parameters given a set of observed data, $\boldsymbol{d}_i$ is,
 %
 \begin{equation}
     p(\boldsymbol{\theta}_i | \boldsymbol{d}_i) \propto p(\boldsymbol{\theta}_i) \, p(\boldsymbol{d}_i | \boldsymbol{\theta}_i)\,,
@@ -426,13 +307,14 @@ where the beta distribution is defined as,
 %
 \begin{equation}
     \mathcal{B}(x | \alpha, \beta) = \frac{x^{\,\alpha-1}(1-x)^{\,\beta-1}}{\int_{0}^{1} u^{\,\alpha-1}(1-u)^{\,\beta-1} \mathrm{d} u}.
+    \label{eq:beta}
 \end{equation}
 %
 and,
 \begin{equation}
     \tilde{\theta}_{k, i} = \frac{\theta_{k, i} - \theta_{k, \mathrm{min}}}{\theta_{k, \mathrm{max}} - \theta_{k, \mathrm{min}}},
 \end{equation}
-is the transformed parameter where $\theta_{k, \mathrm{min}}$ and $\theta_{k, \mathrm{max}}$ are the upper and lower bounds for each parameter. The beta distribution was preferred over a bounded uniform distribution because our sampler evaluates the gradient of the posterior and is thus sensitive to discontinuities. 
+is the transformed parameter where $\theta_{k, \mathrm{min}}$ and $\theta_{k, \mathrm{max}}$ are the upper and lower bounds for each parameter. The beta distribution was preferred over a bounded uniform distribution because our sampler evaluates the gradient of the posterior and is thus sensitive to discontinuities \textbf{\color{red}(see e.g. Figure \ref{fig:beta} in the Appendix)}.
 
 Using notation which represents a given random variable $x \sim q$ as equivalent to being drawn from a probability distribution $p(x) \propto q(x)$ where $q(x)$ is a non-normalised probability density function, we may write the priors for $\boldsymbol{\theta}_i$ as,
 %
@@ -684,7 +566,7 @@ So far, we have shown that we can add parameters to stellar models without sacri
 
 \subsection{Helium enrichment}\label{sec:helium}
 
-We found the value for the helium enrichment ratio, $\Delta Y / \Delta Z$ to be the same in both the PP and MP models, $\Delta Y / \Delta Z = 1.6\substack{+0.5\\-0.4}$. This is consistent with values of $\sim 1.4$ in the literature for stellar models which include heavy element diffusion \citep{Brogaard.VandenBerg.ea2012, Verma.Raodeo.ea2019}.
+We found the value for the helium enrichment ratio, $\Delta Y / \Delta Z$ to be the same in both the PP and MP models, $\Delta Y / \Delta Z = 1.6\substack{+0.5\\-0.4}$. This is consistent with values of $\sim 1.4$ in the literature for stellar models which include heavy element diffusion \textbf{\color{green}[Mention how these were obtained add Casagrande etc.]} \citep{Brogaard.VandenBerg.ea2012, Verma.Raodeo.ea2019}.
 
 When we added the Sun to the pooled models, PPS and MPS, obtained $\Delta Y / \Delta Z$ up to 2-$\sigma$ lower than the models without the Sun. In both models, the resulting $\Delta Y / \Delta Z$ of approximately \numrange{0.8}{1.0} was consistent with the initial helium fraction expected from solar models with our choice of \citet{Asplund.Grevesse.ea2009} abundances \citep{Serenelli.Basu2010}. However, such solar models have been shown to not recover helioseismic measurements of helium in the Sun \citep{Basu.Antia2004, Serenelli.Basu.ea2009, Villante.Serenelli.ea2014}. Solar models with the older \citet{Grevesse.Sauval1998} abundances typically yield higher helium fractions more in-line with helioseismology. The $\Delta Y / \Delta Z$ from the PP and MP models are higher than those including the Sun. We could extend our model to include asteroseismic indicators of helium to improve the uncertainties on $Y$ and test whether this difference becomes more significant.
 
@@ -704,7 +586,7 @@ There are a few prior studies which look at the spread in $\mlt$ for a populatio
 
 We found a greater difference in $\mlt$ between the models with and without the Sun when we max-pooled $\mlt$. The MP models yielded a global $\mlt$ in-line with $\mu_\alpha$ from the PP model. However, when we added the Sun, the model yielded $\mlt \approx 2.1$ which is in common with the solar results (see Appendix \ref{sec:sun-res}). This had a similar affect as assuming a solar calibrated value, because the model favoured fitting to data with the best observational precision. The change in $\mlt$ between the MP and MPS models resulted in a mean difference of $\sim 20$ per cent between the individual stellar ages. This is an example of how adopting a solar calibrated value can bias stellar ages. We argue that carefully including the Sun as a part of the population with an intrinsic spread is a better way to calibrate the stellar models than assuming as solar $\mlt$ across the sample.
 
-In all observables except for $L$, the Sun is near the centre of our distribution of stars. However, we found no relationship between $L$ and $\mlt$ in both our NP and PP models. A possible explanation for the difference in $\mlt$ with and without the Sun could be some systematic offset in our observational data for the sample. Here, we point to our choice of spectroscopic $\teff$ which typically underestimates $\teff$ compared to photometric scales, as noted in \citetalias{Serenelli.Johnson.ea2017}. There is a positive correlation between $\mlt$ and $\teff$, when holding all other variables constant. It is possible that the lower $\mlt$ obtained without including the Sun as a star could be caused by underestimated effective temperatures. Alternatively, the $\mlt$ of the Sun could have been higher than the rest of the sample to compensate for neglecting additional sources of mixing required to reproduce the higher precision solar observables
+In all observables except for $L$, the Sun is near the centre of our distribution of stars. However, we found no relationship between $L$ and $\mlt$ in both our NP and PP models. A possible explanation for the difference in $\mlt$ with and without the Sun could be some systematic offset in our observational data for the sample. Here, we point to our choice of spectroscopic $\teff$ which typically underestimates $\teff$ compared to photometric scales, as noted in \citetalias{Serenelli.Johnson.ea2017}. \textbf{\color{red} We ran a solar model with an additional parameter, $\Delta \teff = T_{\rm eff, obs} - \teff$ which represents a bias in the observed effective temperature. The estimated covariance between $\Delta \teff$ and $\mlt$ was \SI{0.452}{\kelvin}\footnote{\mlt~is dimensionless...} (with a correlation of \num{0.517}). Therefore, underestimating $\teff$ by about \SI{150}{\kelvin} could underestimate $\mlt$ by about \num{0.3}. If we extend this result to the other starts in the sample, the lower $\mlt$ obtained without including the Sun as a star could be caused by underestimating $\teff$ relative to the Sun}. Alternatively, the $\mlt$ of the Sun could have been higher than the rest of the sample to compensate for neglecting additional sources of mixing required to reproduce the higher precision solar observables. \textbf{\color{red} A deeper quantification of systematic uncertainties is left to future work.}
 
 \subsection{Comparison with APOKASC results}\label{sec:comp}
 
@@ -761,7 +643,7 @@ In the central panel of Figure \ref{fig:comp}, we show that our radii are simila
 
 Our ages were also consistent with those from \citetalias{Serenelli.Johnson.ea2017}. The right-most panel of Figure \ref{fig:comp} shows the spread in the relative age differences to be about 18 per cent, slightly underestimated by 4 per cent. We would expect the lower $\teff$ scale to overestimate the ages as found in \citetalias{Serenelli.Johnson.ea2017}, but instead they are comparable. However, as discussed previously, including diffusion has been shown to reduce age estimates compared to those without. Since we have included diffusion, this could explain the similar ages despite the difference in $\teff$ scale.
 
-Including the Sun in our pooled models affected the resulting ages more than mass and radius. Including the Sun typically overestimated the ages compared to models without the Sun. This is expected given the higher $\mlt$ for the models including solar data, because a larger mixing-length leads to more efficient nuclear burning and more time spent during the main sequence phase. 
+Including the Sun in our pooled models affected the resulting ages more than mass and radius. Including the Sun typically overestimated the ages compared to models without the Sun. This is expected given the higher $\mlt$ for the models including solar data, because a larger mixing-length leads to more efficient nuclear burning and more time spent during the MS phase. 
 
 \subsection{Systematic uncertainties}\label{sec:sys}
 
@@ -824,13 +706,86 @@ The data underlying this article are available in the article, in its online sup
 
 \appendix
 
-\section{Training the ANN}\label{sec:apx-train}
+\section{Artificial neural network}\label{sec:ann}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%% TRAINING THE ANN %%%%%%%%%%%%%%%%
+%%%%%%%%%%% ARTIFICIAL NEURAL NETWORK %%%%%%%%%%%%
 
-In Table \ref{tab:std} we give the scaling parameters used to standardise our training dataset. We determined the median, $\mu_{1/2}$ and standard deviation, $\sigma$ to 3 decimal places for each of the input and output dimensions. We then standardised the data by subtracting $\mu_{1/2}$ and dividing by $\sigma$. In Figure \ref{fig:loss} we show the train and validation MAE as a function of epochs for the final ANN configuration. The train and validation loss were comparable throughout training.
+Once we constructed our grid of models, we needed a way in which we could continuously sample the grid for use in our statistical model. We opted to train an ANN. The ANN is advantageous over interpolation because it scales well with dimensionality, training and evaluation is fast, and gradient evaluation is easy due to its roots in linear algebra \citep{Haykin2007}. We trained an ANN on the data generated by the grid of stellar models to map fundamentals to observables. Firstly, we split the grid into a \emph{train} and \emph{validation} dataset for tuning the ANN, as described in Appendix \ref{sec:train}. We then tested a multitude of ANN configurations and training data inputs, repeatedly evaluating them with the validation dataset in Appendix \ref{sec:opt}. In Appendix \ref{sec:test}, we reserved a set of randomly generated, off-grid stellar models as our final \emph{test} dataset to evaluate the approximation ability of the best-performing ANN independently from our train and validation data. Here, we briefly describe the theory and motivation behind the ANN.
+
+An ANN is a network of artificial \emph{neurons} which each transform some input vector, $\boldsymbol{x}$ based on trainable weights, $\boldsymbol{w}$ and a bias, $b$. The weights are represented by the connections between neurons and the bias is a unique scalar associated with each neuron. A multi-layered ANN is where neurons are arranged into a series of layers such that any neuron in layer $j-1$ is connected to at least one of the neurons in layer $j$. 
+
+In this work, we considered a fully-connected ANN, where each neuron in layer $j-1$ is connected to every neuron in layer $j$. The output of the $k$-th neuron in layer $j$ is, 
+%
+\begin{equation}
+    x_{j, k}=f_j(\boldsymbol{w}_{j, k} \cdot \boldsymbol{x}_{j-1} + b_{j, k}),
+\end{equation}
+%
+where $f_j$ is the \emph{activation} function for the $j$-th layer, $\boldsymbol{w}_{j, k}$ are the weights connecting all the neurons in layer $j-1$ to the current neuron, and $b_{j, k}$ is the bias. This generalises such that the output of the $j$-th layer is,
+%
+\begin{equation}
+    \boldsymbol{x}_{j}=f_j(\boldsymbol{W}_{j} \cdot \boldsymbol{x}_{j-1} + \boldsymbol{b}_{j}),
+\end{equation}
+%
+where $\boldsymbol{W}_j$ is the matrix of weights leading to all neurons in the $j$-th layer. For a regression ANN, we typically have a linear activation function applied to the final output layer. Layers of neurons between the input and output layers are called \emph{hidden} layers. Therefore, the output of a network of $H$ hidden layers with initial input $\boldsymbol{\mathbb{X}}$ is,
+%
+\begin{equation}
+    \widetilde{\boldsymbol{\mathbb{Y}}} = \boldsymbol{W}_{H} \cdot f_{H-1}(\dots f_1(\boldsymbol{W}_1 \cdot f_0(\boldsymbol{W}_{0} \cdot \boldsymbol{\mathbb{X}} + \boldsymbol{b}_{0}) + \boldsymbol{b}_1) ) + \boldsymbol{b}_{H}.
+\end{equation}
+%
+We also restricted our configuration to an ANN with the same number of neurons, $N$ in each hidden layer. Hereafter, we refer to our choice of neurons per layer, $N$ and hidden layers, $H$ as the \emph{architecture} (see Figure \ref{fig:net}).
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{figures/network_10.png}
+    \caption{An artificial neural network comprising $H$ hidden layers with $N$ neurons per layer. Arrows connecting the nodes represent tunable weights.}
+    \label{fig:net}
+\end{figure}
+
+To fit the ANN, we used a set of training data, $\boldsymbol{\mathbb{D}}_\mathrm{train} = \{\boldsymbol{\mathbb{X}}_i, \boldsymbol{\mathbb{Y}}_i\}_{i=1}^{N_\mathrm{train}}$ comprising $N_\mathrm{train}$ input-output pairs. We split the training data into pseudo-random batches, $\boldsymbol{\mathbb{D}}_\mathrm{batch}$ because this has been shown to improve ANN stability and computational efficiency \citep{Masters.Luschi2018}. The set of predictions made for each batch is evaluated using a \emph{loss} function which primarily comprises an error function, $E(\boldsymbol{\mathbb{D}}_\mathrm{batch})$ to quantify the difference between the training data outputs ($\boldsymbol{\mathbb{Y}}$) and predictions ($\widetilde{\boldsymbol{\mathbb{Y}}}$). We also considered an additional term to the loss called \emph{regularisation} which helps reduce over-fitting \citep{Goodfellow.Bengio.ea2016}. During fitting, the weights are updated after each batch using an algorithm called the \emph{optimizer}, back-propagating the error with the goal of minimising the loss such that $\widetilde{\boldsymbol{\mathbb{Y}}} \approx \boldsymbol{\mathbb{Y}}$ \citep[see e.g.][]{Rumelhart.Hinton.ea1986}.
+
+We trained the ANN using \textsc{TensorFlow} \citep{Abadi.Barham.ea2016}. We varied the architecture, number of batches, choice of loss function, optimizer, and regularisation during the optimisation phase. For each set of ANN parameters, we initialised the ANN with a random set of weights and biases and minimized the loss over a given number of \emph{epochs}. An epoch is defined as one iteration through the entire training dataset, $\boldsymbol{\mathbb{D}}_\mathrm{train}$. We tracked the loss for each ANN using an independent validation dataset to determine the most effective choice of ANN parameters (see Appendix \ref{sec:opt}).
+
+\subsection{Train, validation, and test data}\label{sec:train}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%% TRAIN-TEST SPLIT %%%%%%%%%%%%%%%%
+
+We built the train and validation datasets from the outputs of the grid of stellar models in Section \ref{sec:grid}. This included the input parameters: $M$, $\mlt$, $Y_\mathrm{init}$, and the initial heavy-elements fraction, $Z_\mathrm{init}$. We also included the $\teff$, $\log g$, $\dnu$, stellar age ($\tau$), radius ($R$), surface metallicity ($\metallicity_\mathrm{surf}$), and other chemical composition information generated by the models. We determined the fractional MS lifetime, $f_{\mathrm{MS}} = \tau / \tau_{\mathrm{MS}}$, of each evolutionary track by taking $\tau_{\mathrm{MS}}$ as the age when the central hydrogen fraction, $X_c < 0.01$. We then cut data where $f_{\mathrm{MS}} < 0.01$ to remove points on the grid prior to the MS. Once we had refined the data from the grid of models, we randomly sampled \num{7.736e6} points to use as the training dataset, with the remaining $\sim \num{2e6}$ points given to the validation dataset. We varied our choice of ANN input and output parameters among those available in the dataset during tuning (see Appendix \ref{sec:opt}).
+
+Additionally, we produced a test dataset of $\sim \num{2e6}$ stellar models evolved using \textsc{MESA}. Values for the initial $M$, $\metallicity$, $Y$, and $\mlt$ were chosen randomly within the range of grid parameters described in Table \ref{tab:grid} such that they spanned the breadth of the grid in an unbiased manner. We prepared this dataset in the same way as the training set, but also constrained it to $\tau < \SI{15}{\giga\year}$ because we consider ages above $\sim \SI{15}{\giga\year}$ unphysical and such points are sparse in the training data. The test dataset was set aside and evaluated on the final ANN.
+
+\subsection{Tuning}\label{sec:opt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%% OPTIMIZATION %%%%%%%%%%%%%%%%%%
+
+We trained an ANN to reproduce stellar observables according to our choice of physics with greater accuracy than typical observational precisions. We experimented with a variety of ANN parameter choices, such as the architecture, activation function, optimization algorithm, and loss function. We tuned the ANN parameters by varying them in both a grid-based and heuristic approach, each time evaluating the accuracy using the validation dataset.
+
+During initial tuning, we found that having stellar age as an input was unstable, because it varied heavily with the other input parameters. We mitigated this by introducing an input to describe the fraction of time a star had spent in a given evolutionary phase, $f_\mathrm{evol}$. 
+%
+\begin{equation}
+    f_\mathrm{evol} = \begin{cases}
+        f_\mathrm{MS},\quad &f_\mathrm{MS} \leq 1\\
+        1 + \frac{\tau\,-\,\tau_\mathrm{MS}}{\tau_\mathrm{end}\,-\,\tau_\mathrm{MS}},\quad &f_\mathrm{MS} > 1
+    \end{cases}\label{eq:fevol}
+\end{equation}
+%
+where $\tau_\mathrm{end}$ is the age of the star at the end of the track,
+%
+\begin{equation}
+    f_\mathrm{MS} = \frac{\tau}{\tau_\mathrm{MS}},
+\end{equation}
+%
+and $\tau_\mathrm{MS}$ is the MS lifetime. A star with $0.01 < f_\mathrm{evol} \leq 1.0$ is in its MS phase, burning hydrogen in its core, and $1.0 < f_\mathrm{evol} \leq 2.0$ has left the MS. Consequently, $f_\mathrm{evol}$ gives the ANN information about the internal state of the star which affects the output observables. Otherwise, $f_\mathrm{evol}$ has little physical meaning, although it could be interpreted as a measure of the evolutionary phase of the star.
+
+We also observed that the ANN trained poorly in areas with a high rate of change in observables, likely because of poor grid coverage in those areas. To bias training to such areas, we calculated the gradient in $\teff$ and $\log g$ between each point for each stellar evolutionary track and used them as optional weights to the loss during tuning. These weights multiplied the difference between the ANN prediction and the training data in our chosen loss function.
+
+After preliminary tuning, we chose the ANN input and output parameters to be $\boldsymbol{\mathbb{X}} = \{f_\mathrm{evol}, M, \mlt, Y_\mathrm{init}, Z_\mathrm{init}\}$ and $\boldsymbol{\mathbb{Y}} = \{\log(\tau), \teff, R, \dnu, \metallicity_\mathrm{surf}\}$ respectively. A generalised form of our neural network is depicted in Figure \ref{fig:net}. The inputs corresponded to initial conditions in the stellar modelling code and the outputs corresponded to surface conditions throughout the lifetime of the star, with the exception of age which is mapped from $f_\mathrm{evol}$.
+
+We standardised the training dataset by subtracting the median, $\mu_{1/2}$ and dividing by the standard deviation, $\sigma$ for each input and output parameter. We found that the ANN performed better when the training data was scaled in this way as opposed to no scaling at all. \textbf{\color{red} We present the parameters used to standardise the training dataset in Table \ref{tab:std}.}
 
 \begin{table*}
     \caption{The median, $\mu_{1/2}$ and standard deviation, $\sigma$ for each parameter in the training data, used to standardise the dataset.}
@@ -838,11 +793,60 @@ In Table \ref{tab:std} we give the scaling parameters used to standardise our tr
     \input{tables/standardisation.tex}
 \end{table*}
 
+We found that the optimal choice of architecture ($N$ and $H$) varied depending on our choice of other ANN parameters. Therefore, each time we explored a new parameter, we trained an ANN with a grid of $(N,H)$ ranging from $(32, 2)$ to $(512, 10)$.
+
+We evaluated the performance of three activation functions: the hyperbolic-tangent, the rectified linear unit \citep[ReLU;][]{Hahnloser.Sarpeshkar.ea2000, Glorot.Bordes.ea2011} and the exponential linear unit \citep[ELU;][]{Clevert.Unterthiner.ea2015}. Although the ReLU activation function out-performed the other two in speed and accuracy, the resulting ANN output was not smooth. The discontinuity in the ReLU function, $f(x) = \max(0, x)$ in turn caused the output to be discontinuous. This made the ANN difficult to sample for our choice of statistical model (see Section \ref{sec:hbm}). Out of the remaining activation functions, ELU performed the best, providing a smooth output which was well-suited to our probabilistic sampling methods.
+
+We compared the performance of two optimisers: Adam \citep{Kingma.Ba2014} and stochastic gradient descent \citep[SGD; see e.g.][]{Ruder2016} with and without momentum \citep{Qian1999}. Both optimizers required a choice of \emph{learning rate} which determined the rate at which the weights were adjusted during training. We found that Adam performed well but the validation loss was noisy as a function of epochs as it struggled to converge. The SGD optimizer was less noisy than Adam, but it was difficult to tune the learning rate. However, SGD with momentum allowed for more adaptive weight updates and out-performed the other configurations.
+
+There are several ways to reduce over-fitting, from minimising the complexity of the architecture, to increasing the size and coverage of the training dataset. One alternative is to introduce weight regularisation. So-called L2 regularisation adds a term, $\sim \lambda_k \sum_i w_{i, k}^2$ to the loss function for a given hidden layer, $k$ which acts to keep the weights small. We varied the magnitude of $\lambda_k$ and found that if it was too large it would dominate the loss function, but if it was too small then performance on the validation dataset was poorer.
+
+We compared the choice of two error functions: mean squared error (MSE) and mean absolute error (MAE). The former is widely used among ANNs because it is more sensitive to large errors. However, we tracked both metrics regardless of which was added to the loss function and found that MAE converged faster. Although MAE is less effective at large errors, we found that these were typically at the edges of the grid and the accuracy was good enough everywhere else.
+
+After extensive tuning, we opted for an ANN with $N=128$ neurons in each of $H=6$ hidden layers. Each of the hidden layers used an ELU activation function and L2 weight regularisation with $\lambda = \num{1e-6}$. We trained the ANN for \num{50000} epochs with a \num{500} training data batches each containing \num{15472} input-output pairs. To fit the ANN, we used an SGD optimiser with an initial learning rate of \num{1e-4} and momentum of \num{0.999} with an MAE loss function. Training took $\sim \SI{48}{\hour}$ on an NVidia Tesla V100 graphics processing unit (GPU). \textbf{\color{red} In Figure \ref{fig:loss} we show the train and validation MAE as a function of epochs for the final ANN configuration. The train and validation loss were comparable throughout training.}
+
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/loss.png}
     \caption{The MAE as a function of epochs for the train and validation datasets.}
     \label{fig:loss}
+\end{figure}
+
+\subsection{Testing}\label{sec:test}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%% Validation %%%%%%%%%%%%%%%%%%%
+
+The test dataset contained $\sim \num{2e6}$ stellar models evolved in the same way as the training dataset, but with initial conditions chosen randomly across the range of the grid. We made predictions for the test dataset, deriving luminosity from the output radius and effective temperature, using the final trained ANN as described in Appendix \ref{sec:opt}. We then evaluated the accuracy of the ANN by taking the difference between the test truth and ANN prediction, $x_\mathrm{true} - x_\mathrm{pred}$. 
+
+\begin{table*}
+	\centering
+	\caption{The median error, $\mu_{1/2}$ and median absolute deviation of the error, $\sigma_\mathrm{MAD} = 1.4826\cdot\mathrm{median}(|E(\mathbb{Y}) - \mu_{1/2}|)$ for a given ANN output parameter, $\mathbb{Y}$ from the test dataset. The error, $E(\mathbb{Y})$, is given in the table header, where $\delta \mathbb{Y} = \widetilde{\mathbb{Y}} - \mathbb{Y}$.}
+	\label{tab:test}
+    \input{tables/test_random.tex}    
+\end{table*}
+
+We found good agreement between the test dataset and ANN predictions, within typical observational uncertainties. We noted that the largest errors lay at the boundaries of the training data and in areas sparsely populated by the grid. This is apparent in Figure \ref{fig:test} where we plot the test error against each parameter. For example, the spread in error increases for $\metallicity_\mathrm{surf} < -0.5$ where training data is sparse at the edge of the grid. However, the accuracy is very good within the observed range covered by our sample of 81 dwarfs and subgiants. Hence, we chose the median absolute deviation (MAD) as an estimator of the spread in error because it is less sensitive to large errors at the grid boundary than the standard deviation.
+
+To represent the accuracy of the ANN, we present the median, $\mu_{1/2}$ and MAD estimator, $\sigma_\mathrm{MAD} = 1.4826\cdot\mathrm{median}(|E(x) - \mu_{1/2}|)$ of the error ($E(x)$) in Table \ref{tab:test}. The median is close to zero for all parameters, showing little systematic bias in the ANN. The MAD is also lower than observational uncertainties quoted in Section \ref{sec:data}. The spread in error for $\dnu$ of $\SI{0.06}{\mu\Hz}$ is comparable to a small number of observations with the best signal-to-noise. However, the error in $\dnu$ predictions is also comparable to other systematic uncertainties in $\dnu$ discussed in Section \ref{subsec:seismo_model}. Therefore, a robust model which takes account of systematic uncertainties pertaining to $\dnu$, including those from the ANN, will be explored in future work (Carboneau et al. in preparation).
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=\linewidth]{figures/test_random_wide.png}
+    \caption{\emph{Left}: the rolling error between a given parameter in the test dataset ($\mathbb{Y}$) and the ANN prediction for that parameter ($\widetilde{\mathbb{Y}}$) where $\delta \mathbb{Y} = \widetilde{\mathbb{Y}} - \mathbb{Y}$. \emph{Right}: a kernel density estimate (KDE) of the error and a normal distribution centred on the median, $\mu_{1/2}$ with an estimator for the standard deviation from the median absolute deviation, $\sigma_\mathrm{MAD}$.}
+    \label{fig:test}
+\end{figure*}
+
+\section{Prior distributions}
+
+\textbf{\color{red} We chose a transformed beta distribution (see Equation \ref{eq:beta}) as the prior for the non-pooled stellar parameters as an alternative to a uniform distribution. Figure \ref{fig:beta} shows the beta distribution compared with a uniform distribution for some parameter $x$ from 0 to 1. We found that the continuously differentiable nature of the beta distribution was preferred by the NUTS over the uniform distribution.}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/beta_distribution.png}
+    \caption{A beta distribution ($\mathcal{B}$) with $\alpha = \beta = 1.2$ for some parameter $x$ and a uniform distribution ($\mathcal{U}$) from 0 to 1.}
+    \label{fig:beta}
 \end{figure}
 
 \section{The synthetic population}\label{sec:test-stars}
