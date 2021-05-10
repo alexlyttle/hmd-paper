@@ -1,0 +1,596 @@
+\begin{thebibliography}{}
+\makeatletter
+\relax
+\def\mn@urlcharsother{\let\do\@makeother \do\$\do\&\do\#\do\^\do\_\do\%\do\~}
+\def\mn@doi{\begingroup\mn@urlcharsother \@ifnextchar [ {\mn@doi@}
+  {\mn@doi@[]}}
+\def\mn@doi@[#1]#2{\def\@tempa{#1}\ifx\@tempa\@empty \href
+  {http://dx.doi.org/#2} {doi:#2}\else \href {http://dx.doi.org/#2} {#1}\fi
+  \endgroup}
+\def\mn@eprint#1#2{\mn@eprint@#1:#2::\@nil}
+\def\mn@eprint@arXiv#1{\href {http://arxiv.org/abs/#1} {{\tt arXiv:#1}}}
+\def\mn@eprint@dblp#1{\href {http://dblp.uni-trier.de/rec/bibtex/#1.xml}
+  {dblp:#1}}
+\def\mn@eprint@#1:#2:#3:#4\@nil{\def\@tempa {#1}\def\@tempb {#2}\def\@tempc
+  {#3}\ifx \@tempc \@empty \let \@tempc \@tempb \let \@tempb \@tempa \fi \ifx
+  \@tempb \@empty \def\@tempb {arXiv}\fi \@ifundefined
+  {mn@eprint@\@tempb}{\@tempb:\@tempc}{\expandafter \expandafter \csname
+  mn@eprint@\@tempb\endcsname \expandafter{\@tempc}}}
+
+\bibitem[\protect\citeauthoryear{Abadi et~al.,}{Abadi
+  et~al.}{2016}]{Abadi.Barham.ea2016}
+Abadi M.,  et~al., 2016, preprint (\mn@eprint {arXiv} {1605.08695})
+
+\bibitem[\protect\citeauthoryear{Albareti et~al.,}{Albareti
+  et~al.}{2017}]{Albareti.AllendePrieto.ea2017}
+Albareti F.~D.,  et~al., 2017, \mn@doi [ApJS] {10.3847/1538-4365/aa8992}, 233,
+  25
+
+\bibitem[\protect\citeauthoryear{Anderson, Hogg, Leistedt, {Price-Whelan}  \&
+  Bovy}{Anderson et~al.}{2018}]{Anderson.Hogg.ea2018}
+Anderson L.,  Hogg D.~W.,  Leistedt B.,  {Price-Whelan} A.~M.,   Bovy J.,
+  2018, \mn@doi [AJ] {10.3847/1538-3881/aad7bf}, 156, 145
+
+\bibitem[\protect\citeauthoryear{Appourchaux et~al.,}{Appourchaux
+  et~al.}{2015}]{Appourchaux.Antia.ea2015}
+Appourchaux T.,  et~al., 2015, \mn@doi [A\&A] {10.1051/0004-6361/201526610},
+  582, A25
+
+\bibitem[\protect\citeauthoryear{Asplund, Grevesse, Sauval  \& Scott}{Asplund
+  et~al.}{2009}]{Asplund.Grevesse.ea2009}
+Asplund M.,  Grevesse N.,  Sauval A.~J.,   Scott P.,  2009, \mn@doi [ARA\&A]
+  {10.1146/annurev.astro.46.060407.145222}, 47, 481
+
+\bibitem[\protect\citeauthoryear{Aver, Olive  \& Skillman}{Aver
+  et~al.}{2015}]{Aver.Olive.ea2015}
+Aver E.,  Olive K.~A.,   Skillman E.~D.,  2015, \mn@doi [J. Cosmol. Astropart.
+  Phys.] {10.1088/1475-7516/2015/07/011}, 07, 011
+
+\bibitem[\protect\citeauthoryear{Baglin et~al.,}{Baglin
+  et~al.}{2006}]{Baglin.Auvergne.ea2006}
+Baglin A.,  et~al., 2006, in 36th {{COSPAR}} Scientific Assembly. p.~3749
+
+\bibitem[\protect\citeauthoryear{Bahcall, Pinsonneault  \& Wasserburg}{Bahcall
+  et~al.}{1995}]{Bahcall.Pinsonneault.ea1995}
+Bahcall J.~N.,  Pinsonneault M.~H.,   Wasserburg G.~J.,  1995, \mn@doi [Rev.
+  Mod. Phys.] {10.1103/RevModPhys.67.781}, 67, 781
+
+\bibitem[\protect\citeauthoryear{Ball \& Gizon}{Ball \&
+  Gizon}{2014}]{Ball.Gizon2014}
+Ball W.~H.,  Gizon L.,  2014, \mn@doi [A\&A] {10.1051/0004-6361/201424325},
+  568, A123
+
+\bibitem[\protect\citeauthoryear{Balser}{Balser}{2006}]{Balser2006}
+Balser D.~S.,  2006, \mn@doi [AJ] {10.1086/508515}, 132, 2326
+
+\bibitem[\protect\citeauthoryear{Basu \& Antia}{Basu \&
+  Antia}{2004}]{Basu.Antia2004}
+Basu S.,  Antia H.~M.,  2004, \mn@doi [Astrophys. J. Lett.] {10.1086/421110},
+  606, L85
+
+\bibitem[\protect\citeauthoryear{Bellinger, Angelou, Hekker, Basu, Ball  \&
+  Guggenberger}{Bellinger et~al.}{2016}]{Bellinger.Angelou.ea2016}
+Bellinger E.~P.,  Angelou G.~C.,  Hekker S.,  Basu S.,  Ball W.~H.,
+  Guggenberger E.,  2016, \mn@doi [ApJ] {10.3847/0004-637X/830/1/31}, 830, 31
+
+\bibitem[\protect\citeauthoryear{Berger, Huber, {van Saders}, Gaidos, Tayar  \&
+  Kraus}{Berger et~al.}{2020}]{Berger.Huber.ea2020}
+Berger T.~A.,  Huber D.,  {van Saders} J.~L.,  Gaidos E.,  Tayar J.,   Kraus
+  A.~L.,  2020, \mn@doi [AJ] {10.3847/1538-3881/159/6/280}, 159, 280
+
+\bibitem[\protect\citeauthoryear{Blanton et~al.,}{Blanton
+  et~al.}{2017}]{Blanton.Bershady.ea2017}
+Blanton M.~R.,  et~al., 2017, \mn@doi [AJ] {10.3847/1538-3881/aa7567}, 154, 28
+
+\bibitem[\protect\citeauthoryear{Bonaca et~al.,}{Bonaca
+  et~al.}{2012}]{Bonaca.Tanner.ea2012}
+Bonaca A.,  et~al., 2012, \mn@doi [Astrophys. J. Lett.]
+  {10.1088/2041-8205/755/1/L12}, 755, L12
+
+\bibitem[\protect\citeauthoryear{Borucki et~al.,}{Borucki
+  et~al.}{2010}]{Borucki.Koch.ea2010}
+Borucki W.~J.,  et~al., 2010, \mn@doi [Science] {10.1126/science.1185402}, 327,
+  977
+
+\bibitem[\protect\citeauthoryear{Brogaard et~al.,}{Brogaard
+  et~al.}{2012}]{Brogaard.VandenBerg.ea2012}
+Brogaard K.,  et~al., 2012, \mn@doi [A\&A] {10.1051/0004-6361/201219196}, 543,
+  A106
+
+\bibitem[\protect\citeauthoryear{Broomhall, Chaplin, Elsworth  \&
+  New}{Broomhall et~al.}{2011}]{Broomhall.Chaplin.ea2011}
+Broomhall A.-M.,  Chaplin W.~J.,  Elsworth Y.,   New R.,  2011, \mn@doi [MNRAS]
+  {10.1111/j.1365-2966.2011.18375.x}, 413, 2978
+
+\bibitem[\protect\citeauthoryear{Campante et~al.,}{Campante
+  et~al.}{2016}]{Campante.Lund.ea2016}
+Campante T.~L.,  et~al., 2016, \mn@doi [ApJ] {10.3847/0004-637X/819/1/85}, 819,
+  85
+
+\bibitem[\protect\citeauthoryear{Casagrande, Flynn, Portinari, Girardi  \&
+  Jimenez}{Casagrande et~al.}{2007}]{Casagrande.Flynn.ea2007}
+Casagrande L.,  Flynn C.,  Portinari L.,  Girardi L.,   Jimenez R.,  2007,
+  \mn@doi [MNRAS] {10.1111/j.1365-2966.2007.12512.x}, 382, 1516
+
+\bibitem[\protect\citeauthoryear{Casagrande, Ram{\'i}rez, Mel{\'e}ndez, Bessell
+   \& Asplund}{Casagrande et~al.}{2010}]{Casagrande.Ramirez.ea2010}
+Casagrande L.,  Ram{\'i}rez I.,  Mel{\'e}ndez J.,  Bessell M.,   Asplund M.,
+  2010, \mn@doi [A\&A] {10.1051/0004-6361/200913204}, 512, A54
+
+\bibitem[\protect\citeauthoryear{Chan \& Bovy}{Chan \&
+  Bovy}{2020}]{Chan.Bovy2020}
+Chan V.~C.,  Bovy J.,  2020, \mn@doi [MNRAS] {10.1093/mnras/staa571}, 493, 4367
+
+\bibitem[\protect\citeauthoryear{Chaplin \& Miglio}{Chaplin \&
+  Miglio}{2013}]{Chaplin.Miglio2013}
+Chaplin W.~J.,  Miglio A.,  2013, \mn@doi [ARA\&A]
+  {10.1146/annurev-astro-082812-140938}, 51, 353
+
+\bibitem[\protect\citeauthoryear{Chaplin, Elsworth, Miller, Verner  \&
+  New}{Chaplin et~al.}{2007}]{Chaplin.Elsworth.ea2007}
+Chaplin W.~J.,  Elsworth Y.,  Miller B.~A.,  Verner G.~A.,   New R.,  2007,
+  \mn@doi [ApJ] {10.1086/512543}, 659, 1749
+
+\bibitem[\protect\citeauthoryear{Chaplin et~al.,}{Chaplin
+  et~al.}{2020}]{Chaplin.Serenelli.ea2020}
+Chaplin W.~J.,  et~al., 2020, \mn@doi [Nat. Astron.]
+  {10.1038/s41550-019-0975-9}, 4, 382
+
+\bibitem[\protect\citeauthoryear{Choi, Dotter, Conroy, Cantiello, Paxton  \&
+  Johnson}{Choi et~al.}{2016}]{Choi.Dotter.ea2016}
+Choi J.,  Dotter A.,  Conroy C.,  Cantiello M.,  Paxton B.,   Johnson B.~D.,
+  2016, \mn@doi [ApJ] {10.3847/0004-637X/823/2/102}, 823, 102
+
+\bibitem[\protect\citeauthoryear{{Christensen-Dalsgaard}, Proffitt  \&
+  Thompson}{{Christensen-Dalsgaard}
+  et~al.}{1993}]{Christensen-Dalsgaard.Proffitt.ea1993}
+{Christensen-Dalsgaard} J.,  Proffitt C.~R.,   Thompson M.~J.,  1993, \mn@doi
+  [Astrophys. J. Lett.] {10.1086/186725}, 403, L75
+
+\bibitem[\protect\citeauthoryear{Clevert, Unterthiner  \& Hochreiter}{Clevert
+  et~al.}{2015}]{Clevert.Unterthiner.ea2015}
+Clevert D.-A.,  Unterthiner T.,   Hochreiter S.,  2015, preprint (\mn@eprint
+  {arXiv} {1511.07289})
+
+\bibitem[\protect\citeauthoryear{Connelly, Bizzarro, Krot, Nordlund, Wielandt
+  \& Ivanova}{Connelly et~al.}{2012}]{Connelly.Bizzarro.ea2012}
+Connelly J.~N.,  Bizzarro M.,  Krot A.~N.,  Nordlund {\AA}.,  Wielandt D.,
+  Ivanova M.~A.,  2012, \mn@doi [Science] {10.1126/science.1226919}, 338, 651
+
+\bibitem[\protect\citeauthoryear{Cooke \& Fumagalli}{Cooke \&
+  Fumagalli}{2018}]{Cooke.Fumagalli2018}
+Cooke R.~J.,  Fumagalli M.,  2018, \mn@doi [Nat. Astron.]
+  {10.1038/s41550-018-0584-z}, 2, 957
+
+\bibitem[\protect\citeauthoryear{Cyburt, Fields, Olive  \& Yeh}{Cyburt
+  et~al.}{2016}]{Cyburt.Fields.ea2016}
+Cyburt R.~H.,  Fields B.~D.,  Olive K.~A.,   Yeh T.-H.,  2016, \mn@doi [Rev.
+  Mod. Phys.] {10.1103/RevModPhys.88.015004}, 88, 015004
+
+\bibitem[\protect\citeauthoryear{Dillon et~al.,}{Dillon
+  et~al.}{2017}]{Dillon.Langmore.ea2017}
+Dillon J.~V.,  et~al., 2017, preprint (\mn@eprint {arXiv} {1711.10604})
+
+\bibitem[\protect\citeauthoryear{Dotter}{Dotter}{2016}]{Dotter2016}
+Dotter A.,  2016, \mn@doi [ApJS] {10.3847/0067-0049/222/1/8}, 222, 8
+
+\bibitem[\protect\citeauthoryear{Dotter, Conroy, Cargile  \& Asplund}{Dotter
+  et~al.}{2017}]{Dotter.Conroy.ea2017}
+Dotter A.,  Conroy C.,  Cargile P.,   Asplund M.,  2017, \mn@doi [ApJ]
+  {10.3847/1538-4357/aa6d10}, 840, 99
+
+\bibitem[\protect\citeauthoryear{Ferguson, Alexander, Allard, Barman, Bodnarik,
+  Hauschildt, {Heffner-Wong}  \& Tamanai}{Ferguson
+  et~al.}{2005}]{Ferguson.Alexander.ea2005}
+Ferguson J.~W.,  Alexander D.~R.,  Allard F.,  Barman T.,  Bodnarik J.~G.,
+  Hauschildt P.~H.,  {Heffner-Wong} A.,   Tamanai A.,  2005, \mn@doi [ApJ]
+  {10.1086/428642}, 623, 585
+
+\bibitem[\protect\citeauthoryear{Feuillet, Bovy, Holtzman, Girardi, MacDonald,
+  Majewski  \& Nidever}{Feuillet et~al.}{2016}]{Feuillet.Bovy.ea2016}
+Feuillet D.~K.,  Bovy J.,  Holtzman J.,  Girardi L.,  MacDonald N.,  Majewski
+  S.~R.,   Nidever D.~L.,  2016, \mn@doi [The Astrophysical Journal]
+  {10.3847/0004-637X/817/1/40}, 817, 40
+
+\bibitem[\protect\citeauthoryear{Frebel}{Frebel}{2010}]{Frebel2010}
+Frebel A.,  2010, \mn@doi [Astron. Nachrichten] {10.1002/asna.201011362}, 331,
+  474
+
+\bibitem[\protect\citeauthoryear{{Gaia Collaboration} et~al.,}{{Gaia
+  Collaboration} et~al.}{2016}]{GaiaCollaboration.Prusti.ea2016}
+{Gaia Collaboration} et~al., 2016, \mn@doi [A\&A]
+  {10.1051/0004-6361/201629272}, 595, A1
+
+\bibitem[\protect\citeauthoryear{{Gaia Collaboration} et~al.,}{{Gaia
+  Collaboration} et~al.}{2018}]{GaiaCollaboration.Brown.ea2018}
+{Gaia Collaboration} et~al., 2018, \mn@doi [A\&A]
+  {10.1051/0004-6361/201833051}, 616, A1
+
+\bibitem[\protect\citeauthoryear{Garc{\'i}a \& Ballot}{Garc{\'i}a \&
+  Ballot}{2019}]{Garcia.Ballot2019}
+Garc{\'i}a R.~A.,  Ballot J.,  2019, \mn@doi [Living Rev. Sol. Phys.]
+  {10.1007/s41116-019-0020-1}, 16, 4
+
+\bibitem[\protect\citeauthoryear{Garc{\'i}a~P{\'e}rez
+  et~al.,}{Garc{\'i}a~P{\'e}rez
+  et~al.}{2016}]{GarciaPerez.AllendePrieto.ea2016}
+Garc{\'i}a~P{\'e}rez A.~E.,  et~al., 2016, \mn@doi [AJ]
+  {10.3847/0004-6256/151/6/144}, 151, 144
+
+\bibitem[\protect\citeauthoryear{Garc{\'i}a, Mathur, Salabert, Ballot,
+  R{\'e}gulo, Metcalfe  \& Baglin}{Garc{\'i}a
+  et~al.}{2010}]{Garcia.Mathur.ea2010}
+Garc{\'i}a R.~A.,  Mathur S.,  Salabert D.,  Ballot J.,  R{\'e}gulo C.,
+  Metcalfe T.~S.,   Baglin A.,  2010, \mn@doi [Science]
+  {10.1126/science.1191064}, 329, 1032
+
+\bibitem[\protect\citeauthoryear{Gelman \& Rubin}{Gelman \&
+  Rubin}{1992}]{Gelman.Rubin1992}
+Gelman A.,  Rubin D.~B.,  1992, \mn@doi [Stat. Sci.] {10.1214/ss/1177011136},
+  7, 457
+
+\bibitem[\protect\citeauthoryear{Glorot, Bordes  \& Bengio}{Glorot
+  et~al.}{2011}]{Glorot.Bordes.ea2011}
+Glorot X.,  Bordes A.,   Bengio Y.,  2011, Proc. 14th Int. Conf. Artif. Intell.
+  Statisitics AISTATS 2011, 15, 315
+
+\bibitem[\protect\citeauthoryear{Goodfellow, Bengio  \& Courville}{Goodfellow
+  et~al.}{2016}]{Goodfellow.Bengio.ea2016}
+Goodfellow I.,  Bengio Y.,   Courville A.,  2016, Deep Learning.
+{MIT Press}
+
+\bibitem[\protect\citeauthoryear{Green et~al.,}{Green
+  et~al.}{2018}]{Green.Schlafly.ea2018}
+Green G.~M.,  et~al., 2018, \mn@doi [MNRAS] {10.1093/mnras/sty1008}, 478, 651
+
+\bibitem[\protect\citeauthoryear{Grevesse \& Sauval}{Grevesse \&
+  Sauval}{1998}]{Grevesse.Sauval1998}
+Grevesse N.,  Sauval A.~J.,  1998, \mn@doi [Space Sci. Rev.]
+  {10.1023/A:1005161325181}, 85, 161
+
+\bibitem[\protect\citeauthoryear{Hahnloser, Sarpeshkar, Mahowald, Douglas  \&
+  Seung}{Hahnloser et~al.}{2000}]{Hahnloser.Sarpeshkar.ea2000}
+Hahnloser R. H.~R.,  Sarpeshkar R.,  Mahowald M.~A.,  Douglas R.~J.,   Seung
+  H.~S.,  2000, \mn@doi [Nature] {10.1038/35016072}, 405, 947
+
+\bibitem[\protect\citeauthoryear{Hall et~al.,}{Hall
+  et~al.}{2019}]{Hall.Davies.ea2019}
+Hall O.~J.,  et~al., 2019, \mn@doi [MNRAS] {10.1093/mnras/stz1092}, 486, 3569
+
+\bibitem[\protect\citeauthoryear{Hawkins, Leistedt, Bovy  \& Hogg}{Hawkins
+  et~al.}{2017}]{Hawkins.Leistedt.ea2017}
+Hawkins K.,  Leistedt B.,  Bovy J.,   Hogg D.~W.,  2017, \mn@doi [MNRAS]
+  {10.1093/mnras/stx1655}, 471, 722
+
+\bibitem[\protect\citeauthoryear{Haykin}{Haykin}{2007}]{Haykin2007}
+Haykin S.,  2007, Neural Networks: {{A}} Comprehensive Foundation (3rd
+  Edition).
+{Prentice-Hall, Inc.}, {USA}
+
+\bibitem[\protect\citeauthoryear{Hendriks \& Aerts}{Hendriks \&
+  Aerts}{2019}]{Hendriks.Aerts2019}
+Hendriks L.,  Aerts C.,  2019, \mn@doi [PASP] {10.1088/1538-3873/aaeeec}, 131,
+  108001
+
+\bibitem[\protect\citeauthoryear{Hoffman \& Gelman}{Hoffman \&
+  Gelman}{2014}]{Hoffman.Gelman2014}
+Hoffman M.~D.,  Gelman A.,  2014, J. Mach. Learn. Res., 15, 1593
+
+\bibitem[\protect\citeauthoryear{Hogg, Myers  \& Bovy}{Hogg
+  et~al.}{2010}]{Hogg.Myers.ea2010}
+Hogg D.~W.,  Myers A.~D.,   Bovy J.,  2010, \mn@doi [ApJ]
+  {10.1088/0004-637X/725/2/2166}, 725, 2166
+
+\bibitem[\protect\citeauthoryear{Hon, Stello  \& Yu}{Hon
+  et~al.}{2017}]{Hon.Stello.ea2017}
+Hon M.,  Stello D.,   Yu J.,  2017, \mn@doi [MNRAS] {10.1093/mnras/stx1174},
+  469, 4578
+
+\bibitem[\protect\citeauthoryear{Hon, Stello  \& Yu}{Hon
+  et~al.}{2018}]{Hon.Stello.ea2018a}
+Hon M.,  Stello D.,   Yu J.,  2018, \mn@doi [MNRAS] {10.1093/mnras/sty483},
+  476, 3233
+
+\bibitem[\protect\citeauthoryear{Huber et~al.,}{Huber
+  et~al.}{2011}]{Huber.Bedding.ea2011}
+Huber D.,  et~al., 2011, \mn@doi [ApJ] {10.1088/0004-637X/743/2/143}, 743, 143
+
+\bibitem[\protect\citeauthoryear{Huber et~al.,}{Huber
+  et~al.}{2017}]{Huber.Zinn.ea2017}
+Huber D.,  et~al., 2017, \mn@doi [ApJ] {10.3847/1538-4357/aa75ca}, 844, 102
+
+\bibitem[\protect\citeauthoryear{Huber et~al.,}{Huber
+  et~al.}{2019}]{Huber.Chaplin.ea2019}
+Huber D.,  et~al., 2019, \mn@doi [AJ] {10.3847/1538-3881/ab1488}, 157, 245
+
+\bibitem[\protect\citeauthoryear{Kiefer, Schad, Davies  \& Roth}{Kiefer
+  et~al.}{2017}]{Kiefer.Schad.ea2017}
+Kiefer R.,  Schad A.,  Davies G.,   Roth M.,  2017, \mn@doi [A\&A]
+  {10.1051/0004-6361/201628469}, 598, A77
+
+\bibitem[\protect\citeauthoryear{Kingma \& Ba}{Kingma \&
+  Ba}{2014}]{Kingma.Ba2014}
+Kingma D.~P.,  Ba J.,  2014, preprint (\mn@eprint {arXiv} {1412.6980})
+
+\bibitem[\protect\citeauthoryear{Kjeldsen, Bedding  \&
+  {Christensen-Dalsgaard}}{Kjeldsen et~al.}{2008}]{Kjeldsen.Bedding.ea2008}
+Kjeldsen H.,  Bedding T.~R.,   {Christensen-Dalsgaard} J.,  2008, \mn@doi
+  [Astrophys. J. Lett.] {10.1086/591667}, 683, L175
+
+\bibitem[\protect\citeauthoryear{Korn, Grundahl, Richard, Mashonkina, Barklem,
+  Collet, Gustafsson  \& Piskunov}{Korn et~al.}{2007}]{Korn.Grundahl.ea2007}
+Korn A.~J.,  Grundahl F.,  Richard O.,  Mashonkina L.,  Barklem P.~S.,  Collet
+  R.,  Gustafsson B.,   Piskunov N.,  2007, \mn@doi [ApJ] {10.1086/523098},
+  671, 402
+
+\bibitem[\protect\citeauthoryear{Kuszlewicz, Chaplin, North, Farr, Bell,
+  Davies, Campante  \& Hekker}{Kuszlewicz
+  et~al.}{2019}]{Kuszlewicz.Chaplin.ea2019}
+Kuszlewicz J.~S.,  Chaplin W.~J.,  North T. S.~H.,  Farr W.~M.,  Bell K.~J.,
+  Davies G.~R.,  Campante T.~L.,   Hekker S.,  2019, \mn@doi [MNRAS]
+  {10.1093/mnras/stz1689}, 488, 572
+
+\bibitem[\protect\citeauthoryear{Leistedt \& Hogg}{Leistedt \&
+  Hogg}{2017}]{Leistedt.Hogg2017}
+Leistedt B.,  Hogg D.~W.,  2017, \mn@doi [AJ] {10.3847/1538-3881/aa91d5}, 154,
+  222
+
+\bibitem[\protect\citeauthoryear{Li, Bedding, Huber, Ball, Stello, Murphy  \&
+  {Bland-Hawthorn}}{Li et~al.}{2018}]{Li.Bedding.ea2018}
+Li T.,  Bedding T.~R.,  Huber D.,  Ball W.~H.,  Stello D.,  Murphy S.~J.,
+  {Bland-Hawthorn} J.,  2018, \mn@doi [MNRAS] {10.1093/mnras/stx3079}, 475, 981
+
+\bibitem[\protect\citeauthoryear{Lindegren et~al.,}{Lindegren
+  et~al.}{2018}]{Lindegren.Hernandez.ea2018}
+Lindegren L.,  et~al., 2018, \mn@doi [A\&A] {10.1051/0004-6361/201832727}, 616,
+  A2
+
+\bibitem[\protect\citeauthoryear{Magic, Weiss  \& Asplund}{Magic
+  et~al.}{2015}]{Magic.Weiss.ea2015}
+Magic Z.,  Weiss A.,   Asplund M.,  2015, \mn@doi [A\&A]
+  {10.1051/0004-6361/201423760}, 573, A89
+
+\bibitem[\protect\citeauthoryear{Masters \& Luschi}{Masters \&
+  Luschi}{2018}]{Masters.Luschi2018}
+Masters D.,  Luschi C.,  2018, preprint (\mn@eprint {arXiv} {1804.07612})
+
+\bibitem[\protect\citeauthoryear{Morton \& Winn}{Morton \&
+  Winn}{2014}]{Morton.Winn2014}
+Morton T.~D.,  Winn J.~N.,  2014, \mn@doi [ApJ] {10.1088/0004-637X/796/1/47},
+  796, 47
+
+\bibitem[\protect\citeauthoryear{Nissen, Silva~Aguirre,
+  {Christensen-Dalsgaard}, Collet, Grundahl  \& Slumstrup}{Nissen
+  et~al.}{2017}]{Nissen.SilvaAguirre.ea2017}
+Nissen P.~E.,  Silva~Aguirre V.,  {Christensen-Dalsgaard} J.,  Collet R.,
+  Grundahl F.,   Slumstrup D.,  2017, \mn@doi [A\&A]
+  {10.1051/0004-6361/201731845}, 608, A112
+
+\bibitem[\protect\citeauthoryear{Nsamba, Campante, Monteiro, Cunha, Rendle,
+  Reese  \& Verma}{Nsamba et~al.}{2018}]{Nsamba.Campante.ea2018}
+Nsamba B.,  Campante T.~L.,  Monteiro M. J. P. F.~G.,  Cunha M.~S.,  Rendle
+  B.~M.,  Reese D.~R.,   Verma K.,  2018, \mn@doi [MNRAS]
+  {10.1093/mnras/sty948}, 477, 5052
+
+\bibitem[\protect\citeauthoryear{{\"O}nehag, Gustafsson  \& Korn}{{\"O}nehag
+  et~al.}{2014}]{Onehag.Gustafsson.ea2014}
+{\"O}nehag A.,  Gustafsson B.,   Korn A.,  2014, \mn@doi [A\&A]
+  {10.1051/0004-6361/201322663}, 562, A102
+
+\bibitem[\protect\citeauthoryear{Paquette, Pelletier, Fontaine  \&
+  Michaud}{Paquette et~al.}{1986}]{Paquette.Pelletier.ea1986}
+Paquette C.,  Pelletier C.,  Fontaine G.,   Michaud G.,  1986, \mn@doi [ApJS]
+  {10.1086/191111}, 61, 177
+
+\bibitem[\protect\citeauthoryear{Paxton, Bildsten, Dotter, Herwig, Lesaffre  \&
+  Timmes}{Paxton et~al.}{2011}]{Paxton.Bildsten.ea2011}
+Paxton B.,  Bildsten L.,  Dotter A.,  Herwig F.,  Lesaffre P.,   Timmes F.,
+  2011, \mn@doi [ApJS] {10.1088/0067-0049/192/1/3}, 192, 3
+
+\bibitem[\protect\citeauthoryear{Paxton et~al.,}{Paxton
+  et~al.}{2013}]{Paxton.Cantiello.ea2013}
+Paxton B.,  et~al., 2013, \mn@doi [ApJS] {10.1088/0067-0049/208/1/4}, 208, 4
+
+\bibitem[\protect\citeauthoryear{Paxton et~al.,}{Paxton
+  et~al.}{2015}]{Paxton.Marchant.ea2015}
+Paxton B.,  et~al., 2015, \mn@doi [ApJS] {10.1088/0067-0049/220/1/15}, 220, 15
+
+\bibitem[\protect\citeauthoryear{Paxton et~al.,}{Paxton
+  et~al.}{2018}]{Paxton.Schwab.ea2018}
+Paxton B.,  et~al., 2018, \mn@doi [ApJS] {10.3847/1538-4365/aaa5a8}, 234, 34
+
+\bibitem[\protect\citeauthoryear{Paxton et~al.,}{Paxton
+  et~al.}{2019}]{Paxton.Smolec.ea2019}
+Paxton B.,  et~al., 2019, \mn@doi [ApJS] {10.3847/1538-4365/ab2241}, 243, 10
+
+\bibitem[\protect\citeauthoryear{Peimbert, Peimbert  \& Luridiana}{Peimbert
+  et~al.}{2016}]{Peimbert.Peimbert.ea2016}
+Peimbert A.,  Peimbert M.,   Luridiana V.,  2016, Rev. Mex. Astron.
+  Astrofisica, 52, 419
+
+\bibitem[\protect\citeauthoryear{Pinsonneault, An, {Molenda-{\.Z}akowicz},
+  Chaplin, Metcalfe  \& Bruntt}{Pinsonneault
+  et~al.}{2012}]{Pinsonneault.An.ea2012}
+Pinsonneault M.~H.,  An D.,  {Molenda-{\.Z}akowicz} J.,  Chaplin W.~J.,
+  Metcalfe T.~S.,   Bruntt H.,  2012, \mn@doi [ApJS]
+  {10.1088/0067-0049/199/2/30}, 199, 30
+
+\bibitem[\protect\citeauthoryear{Pinsonneault et~al.,}{Pinsonneault
+  et~al.}{2014}]{Pinsonneault.Elsworth.ea2014}
+Pinsonneault M.~H.,  et~al., 2014, \mn@doi [ApJS] {10.1088/0067-0049/215/2/19},
+  215, 19
+
+\bibitem[\protect\citeauthoryear{Pinsonneault et~al.,}{Pinsonneault
+  et~al.}{2018}]{Pinsonneault.Elsworth.ea2018}
+Pinsonneault M.~H.,  et~al., 2018, \mn@doi [ApJS] {10.3847/1538-4365/aaebfd},
+  239, 32
+
+\bibitem[\protect\citeauthoryear{Pitrou, Coc, Uzan  \& Vangioni}{Pitrou
+  et~al.}{2018}]{Pitrou.Coc.ea2018}
+Pitrou C.,  Coc A.,  Uzan J.-P.,   Vangioni E.,  2018, \mn@doi [Phys. Rep.]
+  {10.1016/j.physrep.2018.04.005}, 754, 1
+
+\bibitem[\protect\citeauthoryear{Qian}{Qian}{1999}]{Qian1999}
+Qian N.,  1999, \mn@doi [Neural Netw.] {10.1016/S0893-6080(98)00116-6}, 12, 145
+
+\bibitem[\protect\citeauthoryear{Rauer et~al.,}{Rauer
+  et~al.}{2014}]{Rauer.Catala.ea2014}
+Rauer H.,  et~al., 2014, \mn@doi [Exp. Astron.] {10.1007/s10686-014-9383-4},
+  38, 249
+
+\bibitem[\protect\citeauthoryear{Ribas, Jordi, Torra  \& Gim{\'e}nez}{Ribas
+  et~al.}{2000}]{Ribas.Jordi.ea2000}
+Ribas I.,  Jordi C.,  Torra J.,   Gim{\'e}nez {\'A}.,  2000, \mn@doi [MNRAS]
+  {10.1046/j.1365-8711.2000.03195.x}, 313, 99
+
+\bibitem[\protect\citeauthoryear{Ricker et~al.,}{Ricker
+  et~al.}{2015}]{Ricker.Winn.ea2015}
+Ricker G.~R.,  et~al., 2015, \mn@doi [J. Astron. Telesc. Instrum. Syst.]
+  {10.1117/1.JATIS.1.1.014003}, 1, 014003
+
+\bibitem[\protect\citeauthoryear{Riess et~al.,}{Riess
+  et~al.}{2018}]{Riess.Casertano.ea2018}
+Riess A.~G.,  et~al., 2018, \mn@doi [ApJ] {10.3847/1538-4357/aac82e}, 861, 126
+
+\bibitem[\protect\citeauthoryear{Rogers \& Nayfonov}{Rogers \&
+  Nayfonov}{2002}]{Rogers.Nayfonov2002}
+Rogers F.~J.,  Nayfonov A.,  2002, \mn@doi [ApJ] {10.1086/341894}, 576, 1064
+
+\bibitem[\protect\citeauthoryear{Ruder}{Ruder}{2016}]{Ruder2016}
+Ruder S.,  2016, preprint (\mn@eprint {arXiv} {1609.04747})
+
+\bibitem[\protect\citeauthoryear{Rumelhart, Hinton  \& Williams}{Rumelhart
+  et~al.}{1986}]{Rumelhart.Hinton.ea1986}
+Rumelhart D.~E.,  Hinton G.~E.,   Williams R.~J.,  1986, \mn@doi [Nature]
+  {10.1038/323533a0}, 323, 533
+
+\bibitem[\protect\citeauthoryear{Salvatier, Wiecki  \& Fonnesbeck}{Salvatier
+  et~al.}{2016}]{Salvatier.Wiecki.ea2016}
+Salvatier J.,  Wiecki T.~V.,   Fonnesbeck C.,  2016, \mn@doi [PeerJ Comput.
+  Sci.] {10.7717/peerj-cs.55}, 2, e55
+
+\bibitem[\protect\citeauthoryear{Scott et~al.,}{Scott
+  et~al.}{2015}]{Scott.Grevesse.ea2015}
+Scott P.,  et~al., 2015, \mn@doi [A\&A] {10.1051/0004-6361/201424109}, 573, A25
+
+\bibitem[\protect\citeauthoryear{Serenelli \& Basu}{Serenelli \&
+  Basu}{2010}]{Serenelli.Basu2010}
+Serenelli A.~M.,  Basu S.,  2010, \mn@doi [ApJ] {10.1088/0004-637X/719/1/865},
+  719, 865
+
+\bibitem[\protect\citeauthoryear{Serenelli, Basu, Ferguson  \&
+  Asplund}{Serenelli et~al.}{2009}]{Serenelli.Basu.ea2009}
+Serenelli A.~M.,  Basu S.,  Ferguson J.~W.,   Asplund M.,  2009, \mn@doi
+  [Astrophys. J. Lett.] {10.1088/0004-637X/705/2/L123}, 705, L123
+
+\bibitem[\protect\citeauthoryear{Serenelli et~al.,}{Serenelli
+  et~al.}{2017}]{Serenelli.Johnson.ea2017}
+Serenelli A.,  et~al., 2017, \mn@doi [ApJS] {10.3847/1538-4365/aa97df}, 233, 23
+
+\bibitem[\protect\citeauthoryear{Silva~Aguirre et~al.,}{Silva~Aguirre
+  et~al.}{2015}]{SilvaAguirre.Davies.ea2015}
+Silva~Aguirre V.,  et~al., 2015, \mn@doi [MNRAS] {10.1093/mnras/stv1388}, 452,
+  2127
+
+\bibitem[\protect\citeauthoryear{Silva~Aguirre et~al.,}{Silva~Aguirre
+  et~al.}{2017}]{SilvaAguirre.Lund.ea2017}
+Silva~Aguirre V.,  et~al., 2017, \mn@doi [ApJ] {10.3847/1538-4357/835/2/173},
+  835, 173
+
+\bibitem[\protect\citeauthoryear{Skrutskie et~al.,}{Skrutskie
+  et~al.}{2006}]{Skrutskie.Cutri.ea2006}
+Skrutskie M.~F.,  et~al., 2006, \mn@doi [AJ] {10.1086/498708}, 131, 1163
+
+\bibitem[\protect\citeauthoryear{Sonoi, Samadi, Belkacem, Ludwig, Caffau  \&
+  Mosser}{Sonoi et~al.}{2015}]{Sonoi.Samadi.ea2015}
+Sonoi T.,  Samadi R.,  Belkacem K.,  Ludwig H.-G.,  Caffau E.,   Mosser B.,
+  2015, \mn@doi [A\&A] {10.1051/0004-6361/201526838}, 583, A112
+
+\bibitem[\protect\citeauthoryear{Stancliffe, Fossati, Passy  \&
+  Schneider}{Stancliffe et~al.}{2016}]{Stancliffe.Fossati.ea2016}
+Stancliffe R.~J.,  Fossati L.,  Passy J.-C.,   Schneider F. R.~N.,  2016,
+  \mn@doi [A\&A] {10.1051/0004-6361/201527099}, 586, A119
+
+\bibitem[\protect\citeauthoryear{Tayar et~al.,}{Tayar
+  et~al.}{2017}]{Tayar.Somers.ea2017}
+Tayar J.,  et~al., 2017, \mn@doi [ApJ] {10.3847/1538-4357/aa6a1e}, 840, 17
+
+\bibitem[\protect\citeauthoryear{Tayar, Claytor, Huber  \& {van Saders}}{Tayar
+  et~al.}{2020}]{Tayar.Claytor.ea2020}
+Tayar J.,  Claytor Z.~R.,  Huber D.,   {van Saders} J.,  2020, preprint
+  (\mn@eprint {arXiv} {2012.07957})
+
+\bibitem[\protect\citeauthoryear{Thoul, Bahcall  \& Loeb}{Thoul
+  et~al.}{1994}]{Thoul.Bahcall.ea1994}
+Thoul A.~A.,  Bahcall J.~N.,   Loeb A.,  1994, \mn@doi [ApJ] {10.1086/173695},
+  421, 828
+
+\bibitem[\protect\citeauthoryear{Townsend \& Teitler}{Townsend \&
+  Teitler}{2013}]{Townsend.Teitler2013}
+Townsend R. H.~D.,  Teitler S.~A.,  2013, \mn@doi [MNRAS]
+  {10.1093/mnras/stt1533}, 435, 3406
+
+\bibitem[\protect\citeauthoryear{Trampedach, Stein, {Christensen-Dalsgaard},
+  Nordlund  \& Asplund}{Trampedach et~al.}{2014}]{Trampedach.Stein.ea2014}
+Trampedach R.,  Stein R.~F.,  {Christensen-Dalsgaard} J.,  Nordlund {\AA}.,
+  Asplund M.,  2014, \mn@doi [MNRAS] {10.1093/mnras/stu2084}, 445, 4366
+
+\bibitem[\protect\citeauthoryear{Valle, Dell'Omodarme, Prada~Moroni  \&
+  Degl'Innocenti}{Valle et~al.}{2015}]{Valle.DellOmodarme.ea2015}
+Valle G.,  Dell'Omodarme M.,  Prada~Moroni P.~G.,   Degl'Innocenti S.,  2015,
+  \mn@doi [A\&A] {10.1051/0004-6361/201424686}, 575, A12
+
+\bibitem[\protect\citeauthoryear{Verma, Hanasoge, Bhattacharya, Antia  \&
+  Krishnamurthi}{Verma et~al.}{2016}]{Verma.Hanasoge.ea2016}
+Verma K.,  Hanasoge S.,  Bhattacharya J.,  Antia H.~M.,   Krishnamurthi G.,
+  2016, \mn@doi [MNRAS] {10.1093/mnras/stw1621}, 461, 4206
+
+\bibitem[\protect\citeauthoryear{Verma, Raodeo, Antia, Mazumdar, Basu, Lund  \&
+  Silva~Aguirre}{Verma et~al.}{2017}]{Verma.Raodeo.ea2017}
+Verma K.,  Raodeo K.,  Antia H.~M.,  Mazumdar A.,  Basu S.,  Lund M.~N.,
+  Silva~Aguirre V.,  2017, \mn@doi [ApJ] {10.3847/1538-4357/aa5da7}, 837, 47
+
+\bibitem[\protect\citeauthoryear{Verma, Raodeo, Basu, Silva~Aguirre, Mazumdar,
+  Mosumgaard, Lund  \& Ranadive}{Verma et~al.}{2019}]{Verma.Raodeo.ea2019}
+Verma K.,  Raodeo K.,  Basu S.,  Silva~Aguirre V.,  Mazumdar A.,  Mosumgaard
+  J.~R.,  Lund M.~N.,   Ranadive P.,  2019, \mn@doi [MNRAS]
+  {10.1093/mnras/sty3374}, 483, 4678
+
+\bibitem[\protect\citeauthoryear{Viani, Basu, Ong~J., Bonaca  \& Chaplin}{Viani
+  et~al.}{2018}]{Viani.Basu.ea2018}
+Viani L.~S.,  Basu S.,  Ong~J. M.~J.,  Bonaca A.,   Chaplin W.~J.,  2018,
+  \mn@doi [ApJ] {10.3847/1538-4357/aab7eb}, 858, 28
+
+\bibitem[\protect\citeauthoryear{Villante, Serenelli, Delahaye  \&
+  Pinsonneault}{Villante et~al.}{2014}]{Villante.Serenelli.ea2014}
+Villante F.~L.,  Serenelli A.~M.,  Delahaye F.,   Pinsonneault M.~H.,  2014,
+  \mn@doi [ApJ] {10.1088/0004-637X/787/1/13}, 787, 13
+
+\bibitem[\protect\citeauthoryear{Weiss \& Schlattl}{Weiss \&
+  Schlattl}{2008}]{Weiss.Schlattl2008}
+Weiss A.,  Schlattl H.,  2008, \mn@doi [Ap\&SS] {10.1007/s10509-007-9606-5},
+  316, 99
+
+\bibitem[\protect\citeauthoryear{West \& Heger}{West \&
+  Heger}{2013}]{West.Heger2013}
+West C.,  Heger A.,  2013, \mn@doi [ApJ] {10.1088/0004-637X/774/1/75}, 774, 75
+
+\bibitem[\protect\citeauthoryear{White, Bedding, Stello,
+  {Christensen-Dalsgaard}, Huber  \& Kjeldsen}{White
+  et~al.}{2011}]{White.Bedding.ea2011}
+White T.~R.,  Bedding T.~R.,  Stello D.,  {Christensen-Dalsgaard} J.,  Huber
+  D.,   Kjeldsen H.,  2011, \mn@doi [ApJ] {10.1088/0004-637X/743/2/161}, 743,
+  161
+
+\bibitem[\protect\citeauthoryear{Zinn, Pinsonneault, Huber  \& Stello}{Zinn
+  et~al.}{2019a}]{Zinn.Pinsonneault.ea2019}
+Zinn J.~C.,  Pinsonneault M.~H.,  Huber D.,   Stello D.,  2019a, \mn@doi [ApJ]
+  {10.3847/1538-4357/ab1f66}, 878, 136
+
+\bibitem[\protect\citeauthoryear{Zinn, Pinsonneault, Huber, Stello, Stassun  \&
+  Serenelli}{Zinn et~al.}{2019b}]{Zinn.Pinsonneault.ea2019a}
+Zinn J.~C.,  Pinsonneault M.~H.,  Huber D.,  Stello D.,  Stassun K.,
+  Serenelli A.,  2019b, \mn@doi [ApJ] {10.3847/1538-4357/ab44a9}, 885, 166
+
+\makeatother
+\end{thebibliography}

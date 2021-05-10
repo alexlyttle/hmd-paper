@@ -20,7 +20,6 @@ __pycache__/
 *.log
 *.out
 *.synctex.gz
-*.bbl
 *.blg
 *.cls
 *.bst
