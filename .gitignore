@@ -44,3 +44,4 @@ output/
 # Misc
 *.bak
 *.sav
+*.cache
